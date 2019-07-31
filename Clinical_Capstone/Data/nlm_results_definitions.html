@@ -1,0 +1,1854 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML lang="en">
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8"/>
+   <META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css"/>
+   <META HTTP-EQUIV="Content-Script-Type" CONTENT="text/javascript"/>
+   <META HTTP-EQUIV="Pragma" CONTENT="no-cache"/>
+   <TITLE>ClinicalTrials.gov Results Data Element Definitions for Interventional and Observational Studies</TITLE>
+
+   <script type="text/javascript" src="jquery/js/jquery.min.js"></script>
+ 
+   <script type="text/javascript">
+   $(document).ready(function(){
+       if (location.hash != "") {
+         var hashTag = location.hash.substring(1); /* don't want leading # */
+         var hashAnchor = "a[name=" + hashTag + "]";
+
+         $( ".sectionBody" ).hide();
+         $( ".toggleImage" ).attr('src', 'images/expand.png');
+         
+         switch(hashTag) {
+         case 'PointOfContact':
+            $( "#Result_PointOfContactBody" ).show();
+            $( "#Result_PointOfContactImg" ).attr("src" , "images/collapse.png");
+            break;
+         case 'AdverseEvents':
+            $( "#Result_AdverseEventsBody" ).show();
+            $( "#Result_AdverseEventsImg" ).attr("src" , "images/collapse.png");
+            break;
+         case 'LimitCaveats':
+            $( "#Result_LimitationsAndCaveats_descriptionBody" ).show();
+            $( "#Result_LimitationsAndCaveats_descriptionImg" ).attr("src" , "images/collapse.png");
+            break;
+         default:
+            $( location.hash + "Body" ).show();
+            $( location.hash + "Img"  ).attr("src" , "images/collapse.png");
+               /* Find the section containing the anchor scrolled to and display the section's body */
+            var parentSection = $( "div.sectionBody" ).has( hashAnchor );
+            if (parentSection.length == 1) {
+               parentSection.show();
+               var sectionImg = parentSection.attr("id").replace("Body", "Img");
+               $( "#" + sectionImg ).attr("src" , "images/collapse.png");
+            } 
+         }
+            /* Make sure we are scrolled properly to the anchor */
+         window.scrollTo(0, $( hashAnchor ).offset().top);
+      };
+      
+      /* Handle section Label events */
+      $(".sectionLabel").click(
+         function(event){
+             var myName = event.delegateTarget.getAttribute("id");
+             var myBody = $('#' + myName.replace("Label", "Body"));
+               myBody.toggle();
+             var myImg = $('#' + myName.replace("Label", "Img"));
+               myImg.attr('src', (myBody.css("display") == "none") ? "images/expand.png" : "images/collapse.png");
+         }
+      );
+    });
+
+   </script>
+
+    <style type="text/css">
+    <!--
+    .indented {
+       padding-left: 30pt;
+       }
+    .padding {
+       padding-left: 10pt;
+       padding-right: 20pt;
+       }
+    .indent0 {
+       padding-left: 0pt;
+       }
+    .sectionLabel:hover {
+       background: #F9F0CC;
+       border-color: black;
+       cursor: pointer;
+       }
+    @media print { 
+    .noprint { display:none; }
+    }
+    LI {
+	margin-bottom: 0.5ex; 
+     }
+    -->
+    </style>
+</HEAD>
+
+<BODY class="padding" style="color:#000000;" BGCOLOR="#FFFFFF" LINK="#0000FF" VLINK="#800080">
+
+    <hr/>
+    <center>
+      <h2>ClinicalTrials.gov Results Data Element Definitions <br> for Interventional and Observational Studies</h2>
+    </center>
+    <center><div style="font-size:7pt">June 27, 2018</div>
+    </center>
+<p>
+This document describes the definitions for results data elements submitted to ClinicalTrials.gov for interventional studies (clinical trials) and observational studies. These definitions are mostly adapted from <a href="https://www.federalregister.gov/documents/2016/09/21/2016-22129/clinical-trials-registration-and-results-information-submission">42 CFR Part 11</a>.
+<p>
+Data element entries are annotated with symbols to indicate generally what information is required to be submitted and under which circumstances. The responsible party must ensure that the information provided complies with any applicable laws, regulations, or policies. For more information about various requirements and definitions of regulatory terms under 42 CFR Part 11, see <a href="https://clinicaltrials.gov/ct2/manage-recs/resources">Support Materials</a>.
+<p>
+<u>Note</u>: The term "clinical study" is used to refer to both interventional and observational studies. The term "participant" is used to refer to a human subject.
+    </p>
+
+    <hr/>
+
+    <p/>
+    <table border=0 align=center>
+      <tr>
+        <td align=center valign=top style="color:#CC0000; font-weight:bold;  font-size:x-large">*</td>
+        <td>&nbsp;&nbsp;Required</td>
+      </tr>
+      <tr>
+        <td align=center valign=top><span style="color:#CC0000; font-weight:bold; font-size:x-large">*</span><span style="color:#000099; font-weight:bold;">&#167;</span></td>
+        <td>&nbsp;&nbsp;Required if Primary Completion Date is on or after January 18, 2017</td>
+      </tr>
+      <tr>
+        <td align=center valign=top style="color:#0000FF; font-weight:bold;  font-size:large">[*]</td>
+        <td>&nbsp;&nbsp;Conditionally required</td>
+      </tr>
+    </table>
+    <hr/>
+
+    <!-- DE 1 -->
+    <a name="Result_ParticipantFlow"></a>
+    <P></P>
+    <div class="sectionLabel" id="Result_ParticipantFlowLabel">
+    <img id="Result_ParticipantFlowImg" class="toggleImage" src="images/collapse.png" alt=""/> <STRONG>1. Participant Flow</STRONG></div>
+    <div id="Result_ParticipantFlowBody" class="sectionBody">
+    <br>
+    Information to document the progress of research participants through each stage of a study in a tabular format, including the number of participants who started and completed the clinical study. (Identical in purpose to a <u><a href="http://www.consort-statement.org/consort-statement/flow-diagram0/">CONSORT flow diagram</a></u>, but represented as tables).
+<P>
+The tabular presentation may be separated into "periods," each of which comprises an interval of study activity. Each period consists of "milestones" for reporting numbers of participants at particular points in time within that period.
+
+    <p>
+    <div class=indented>
+      <a name="Result_ParticipantFlow_recruitDetails"></a>
+      <STRONG><a name="RecruitDetails">Recruitment Details</a></STRONG>
+      <br>Definition: Key information relevant to the recruitment process for the overall study, such as dates of the recruitment period and types of location (For example, medical clinic), to provide context.
+      <br>
+      Limit: 350 characters.
+      <br>
+      <br>
+
+      <a name="Result_ParticipantFlow_preAssgnDescr"></a>
+      <STRONG><a name="PreAssignDetails">Pre-assignment Details</a></STRONG>
+      <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+      <br>Definition: Description of significant events in the study (for example, wash out, run-in) that occur after participant enrollment, but prior to assignment of participants to an arm or group, if any. For example, an explanation of why enrolled participants were excluded from the study before assignment to arms or groups.
+      <br>
+      Limit: 350 characters.
+      <br>
+      <br>
+
+      <a name="Result_ParticipantFlow_ArmGroup"></a>
+      <STRONG><a name="PopFlowArmGroup">Arm/Group Information</a></STRONG>
+      <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+      <br>Definition: Arms or groups for describing the flow of participants through the clinical study. In general, it must include each arm to which participants were assigned.
+      <br>
+      <br>
+
+      <div class=indented>
+        <a name="Result_ParticipantFlow_ArmGroup_title"></a>
+        <STRONG><a name="PopFlowArmGroupTitle">Arm/Group Title</a></STRONG>
+        <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+        <br>
+        Definition: Descriptive label used to identify each arm or group.
+        <br>
+    Limit: >=4 and <= 62 characters.
+        <br>
+        <br>
+
+        <a name="Result_ParticipantFlow_ArmGroup_description"></a>
+        <STRONG><a name="PopFlowArmGroupDesc">Arm/Group Description</a></STRONG>
+        <span style="color:#CC0000; font-weight:bold; font-size:x-large">*</span><span style="color:#000099; font-weight:bold;">&#167;</span>
+        <br>
+        Definition: Brief description of each arm or group. In general, it must include sufficient details to understand each arm to which participants were assigned and the intervention strategy used in each arm. 
+        <br>
+    Limit: 999 characters.
+        <br>
+      </div>
+      <br>
+
+        <a name="Result_ParticipantFlow_typeUnitsRandomized"></a>
+        <STRONG>Type of Units Assigned</STRONG>
+        <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+        <br>
+        Definition: If assignment is based on a unit other than participants, a description of the unit of assignment (for example, eyes, lesions, implants). 
+        <br>
+    Limit: 40 characters.
+        <br>
+        <br>
+
+      <a name="Result_ParticipantFlow_Period"></a>
+      <STRONG><a name="Period">Period(s)</a></STRONG>
+      <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+      <br>
+      Definition: Discrete stages of a clinical study during which numbers of participants at specific significant events or points of time are reported. 
+      <p>
+There is no limit to the number of periods that may be used to describe a single study. Each subsequent period represents a study stage following the previous period. That is, participants "flow" from earlier to later periods. 
+      <br>
+
+      <div class=indented>
+        <a name="Result_ParticipantFlow_Period_title"></a>
+        <STRONG><a name="PeriodTitle">Period Title</a></STRONG>
+        <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+        <br>Definition: Title describing a stage of the study. If only one period is defined, the default title is Overall Study. When a study has more than one period, none of the Period Titles should be Overall Study. 
+        <br>
+    Limit: 40 characters.
+        <br>
+        <br>
+       
+
+          <a name="Result_ParticipantFlow_Milestone_started"></a>
+          <STRONG><a name="Started">Started</a></STRONG>
+          <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+          <a name="Result_ParticipantFlow_Milestone_Started_data"></a>
+          <br>
+          Definition: Number of participants initiating the period. In the first period, it is the number of participants assigned to each arm or group. If assignment is based on a unit other than participants, also include the number of units at the beginning of the period.  
+          <br>
+          <div class=indented>
+            <a name="Result_ParticipantFlow_Milestone_Started_comment"></a>
+            <br><STRONG>Comments</STRONG>
+            <br>
+            Definition: Additional information about the Started milestone or Milestone Data.
+            <br>
+            Limit: 100 characters.
+          </div>
+          <br>
+
+          <div class=not_indented>
+            <a name="Result_ParticipantFlow_Milestone_completed"></a>
+            <STRONG><a name="Completed">Completed</a></STRONG>
+            <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+            <a name="Result_ParticipantFlow_Milestone_Completed_data"></a>
+            <br>
+            Definition: Number of participants at the end of the period. If assignment is based on a unit other than participants, also include the number of units at the end of the period.
+            <div class=indented>
+              <a name="Result_ParticipantFlow_Milestone_Completed_comment"></a>
+              <br><STRONG>Comments</STRONG>
+              <br>
+              Definition: Additional information about the Completed milestone or Milestone Data.
+              <br>
+              Limit: 100 characters.
+            </div>
+          </div>
+          <br>
+
+          <STRONG><a name="NotCompleted">Not Completed</a></STRONG> <em>(calculated automatically)</em>
+          <br>
+          Definition: Number of participants (and units, if applicable) that did not complete the study or period. This is calculated automatically by subtracting Completed from Started. 
+          <br>
+          <br>
+
+          <a name="Result_ParticipantFlow_Milestone_additional"></a>
+          <STRONG><a name="MiscMilestone">Additional Milestone(s)</a></STRONG>
+          <br>
+          Definition: Any specific events or time points in the study when the numbers of participants (and units, if applicable) are reported. While there is no limit to the number of milestones that may be used in a single period, data are required for two milestones, Started and Completed, within each period. 
+          <br>
+          <br>
+
+          <div class=indented>
+            <a name="Result_ParticipantFlow_Milestone_Additional_title"></a>
+            <STRONG><a name="MilestoneName">Milestone Title</a></STRONG> 
+            <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+            <br>Definition: : Label describing the milestone
+            <br>
+            Limit: 40 characters.
+            <br>
+            <br>
+
+            <a name="Result_ParticipantFlow_Milestone_Additional_data"></a>
+            <STRONG><a name="MilestoneData">Milestone Data</a></STRONG>
+            <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+            <br>
+            Definition: Number of participants to reach the milestone, in each arm/group. If assignment is based on a unit other than participants, also include the number of units to reach the milestone. 
+            <br>
+            <br>
+
+            <div class=indented>
+              <a name="Result_ParticipantFlow_Milestone_Additional_comment"></a>
+              <STRONG><a name="MilestoneDataComments">Comments</a></STRONG>
+              <br>
+              Definition: Additional information about the milestone or data.
+              <br>
+              Limit: 100 characters.
+              <br>
+              <br>
+          </div>
+          </div>
+        </div>
+
+        <div class=indented>
+        <STRONG><a name="DWReason">Reason Not Completed</a></STRONG>
+        <br>
+        Definition: Additional information about participants who did not complete the study or period. If reasons are provided, the total number of participants listed as Not Completed must be accounted for by all reasons for non-completion. 
+        <br>
+        <br>
+
+        <div class=indented>
+          <a name="Result_ParticipantFlow_ReasonNotCompleted_reasonType"></a>
+          <STRONG><a name="DWReasonType">Reason Not Completed Type</a></STRONG>
+          <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+          <br>
+          Definition: Reason why participants did not complete the study or period. Select one.
+          <ul type=disc style="margin-left:1em">
+            <li>Adverse Event
+            <li>Death
+            <li>Lack of Efficacy
+            <li>Lost to Follow-Up
+            <li>Physician Decision
+            <li>Pregnancy
+            <li>Protocol Violation
+            <li>Withdrawal by Subject
+            <li>Other
+          </ul>
+
+          <div class=indented>
+          <a name="Result_ParticipantFlow_ReasonNotCompleted_otherReasonName"></a>
+          <STRONG><a name="OtherReasonTitle">Other Reason</a></STRONG>
+          <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+          <br>
+          Definition: A brief description of the reason for non-completion, if "Other" Reason Not Completed Type is selected.  
+          <br>
+          Limit: 40 characters.
+          <br>
+          <br>
+          </div>
+
+          <a name="Result_ParticipantFlow_ReasonNotCompleted_data"></a>
+          <STRONG><a name="DWReasonData">Reason Not Completed Data</a></STRONG>
+          <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+          <br>
+          Definition: Number of participants in each arm or group that did not complete the study or period, for each Reason Not Completed. 
+          <br>
+        </div>
+      </div>
+      </div>
+    </div>
+<!--
+    </div>
+-->
+
+    <!-- DE 2 -->
+    <a name="Result_Baseline"></a>
+    <P></P>
+    <div class="sectionLabel" id="Result_BaselineLabel">
+    <img id="Result_BaselineImg" class="toggleImage" src="images/collapse.png" alt=""/> <STRONG>2. Baseline Characteristics</STRONG></div>
+    <div id="Result_BaselineBody" class="sectionBody">
+    <br>
+    A table of demographic and baseline measures and data collected by arm or comparison group and for the entire population of participants in the clinical study. 
+    <br>
+    <br>
+
+    <div class=indented> <!-- start baseline indented content -->
+
+      <a name="Result_Baseline_ArmGroup"></a>
+      <STRONG><a name="BaselineArmGroup">Arm/Group Information</a></STRONG>
+      <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+      <br>
+      Definition: Arms or comparison groups in the study, including all participants assessed at baseline as specified in the pre-specified protocol and/or statistical analysis plan. 
+      <br>
+      <br>
+
+
+      <div class=indented>  <!-- start baseline Arm/Group -->
+        <a name="Result_Baseline_ArmGroup_title"></a>
+        <STRONG><a name="BaselineArmGroupTitle">Arm/Group Title</a></STRONG>
+        <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+        <br>
+        Definition: Descriptive label used to identify each arm or comparison group. 
+        <br>
+    Limit: >= 4 and <= 62 characters.
+        <br>
+        <br>
+
+        <a name="Result_Baseline_ArmGroup_description"></a>
+        <STRONG><a name="BaselineArmGroupDesc">Arm/Group Description</a></STRONG>
+        <span style="color:#CC0000; font-weight:bold; font-size:x-large">*</span><span style="color:#000099; font-weight:bold;">&#167;</span>
+        <br>
+        Definition: Brief description of each arm or comparison group. In general, it must include sufficient detail 
+	to understand how the arm(s) or comparison groups were derived from the arm(s) to which participants were 
+	assigned in Participant Flow (if different) and the intervention strategy in each arm/group.  
+        <br>
+    Limit: 999 characters.
+        <br>
+        <br>
+      </div>  <!-- end baseline Arm/Group -->
+
+
+      <!-- Baseline Analysis Population Information -->
+
+      <a name="Result_Baseline_Analysis_Population"></a>
+      <STRONG><a name="BaselineAnalysisPopulation">Baseline Analysis Population Information</a></STRONG>
+      <br>
+      <br>
+
+      <div class=indented>  <!-- start baseline analysis poluation information -->
+
+      <a name="Result_Baseline_ArmGroup_participantNumber"></a>
+      <STRONG><a name="OverallBaselineNumber">Overall Number of Baseline Participants</a></STRONG>
+      <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+      <br>
+      Definition: Number of all participants for whom baseline characteristics were measured, in each arm/group 
+      and in the entire study population (total).
+      <br>
+      <br>
+
+        <a name="Result_Baseline_ArmGroup_numUnitsAnalyzed"></a>
+        <STRONG>Overall Number of Units Analyzed</STRONG>
+        <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+        <br>
+        Definition: If the analysis is based on a unit other than participants, the number of all units for which 
+	baseline measures were measured and analyzed, in each arm/group and in the entire study population (total).
+        <br>
+      <br>
+
+        <a name="Result_Baseline_typeUnitsAnalyzed"></a>
+        <STRONG>Type of Units Analyzed</STRONG>
+        <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+        <br>
+        Definition: If the analysis is based on a unit other than participants, a description of the unit of analysis (for example, eyes, lesions, implants). 
+        <br>
+        Limit: 40 characters.
+        <br>
+        <br>
+
+      <a name="Result_Baseline_populationAnalysisDesc"></a>
+      <STRONG><a name="BaselineAnalysisPopulation">Baseline Analysis Population Description</a></STRONG>
+      <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+      <br>
+      Definition: If the Overall Number of Baseline Participants (or units) differs from the number of 
+      participants (or units) assigned to the arm or comparison group and in the entire study population (total), 
+      a brief description of the reason(s) for the difference such as how the analysis population was determined.
+      <br>
+      Limit: 350 characters.
+      <br>
+      <br>
+      </div>
+
+      <a name="Result_Baseline_Measure"></a>
+      <STRONG><a name="BaselineMeasure">Baseline Measure Information</a></STRONG>
+      <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+      <br>
+      Definition: A description of each baseline or demographic characteristic measured in the clinical study. Required baseline measures include Age, Sex/Gender, Race, Ethnicity (if collected under the protocol), and any other measure(s) that were assessed at baseline and used in the analysis of the primary outcome measure(s).
+      <br>
+      <br>
+
+      <div class=indented> <!-- start baseline measure content -->
+        <a name="Result_Baseline_Measure_title"></a>
+        <STRONG><a name="BaselineMeasureType">Baseline Measure Title</a></STRONG>
+        <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+        <br>
+        Definition: The name of the baseline or demographic characteristic measured in the clinical study. Select as many as needed. 
+        <br>
+        <ul type=disc style="margin-left:1em">
+          <li>Study-Specific Measure 
+        <span style="color:#CC0000; font-weight:bold; font-size:x-large">*</span><span style="color:#000099; font-weight:bold;">&#167;</span>
+<em>(Select as many as needed)</em>
+          <li>Age
+            <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+            <em>(Select at least one of the following):</em>
+            <ul type=disc>
+              <li>Age, Continuous: For example - mean or median age
+              <li>Age, Categorical:
+                <ul type=disc>
+                  <li>&lt;=18 years
+                  <li>&gt;18 and &lt;65 years
+                  <li>&gt;=65 years
+                </ul>
+              <li>Age, Customized: Customizable age categories
+            </ul>
+          <li>Sex/Gender
+            <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+            <em>(Select at least one of the following):</em>
+            <ul type=disc>
+              <li>Sex: Female, Male
+              <li>Sex/Gender, Customized
+            </ul>
+          <li>Race and Ethnicity
+          <span style="color:#CC0000; font-weight:bold; font-size:x-large">*</span><span style="color:#000099; font-weight:bold;">&#167;</span>
+          <ul type=disc>
+          <li>Race (NIH/OMB): U.S. National Institutes of Health and U.S. Office of Management and Budget Classification Categories
+          <li>Ethnicity (NIH/OMB): U.S. National Institutes of Health and U.S. Office of Management and Budget Classification Categories
+          <li>Race/Ethnicity, Customized
+          <li>Race and Ethnicity Not Collected
+          </ul>
+          <li>Region of Enrollment
+        </ul>
+
+
+        <br>
+        <div class=indented> 
+          <a name="Result_Baseline_Measure_studySpecificTitle"></a>
+          <STRONG><a name="BaselineOther">Study-Specific Baseline Measure Title(s)</a></STRONG>
+          <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+          <br>
+          Definition: If "Study-Specific Measure" is chosen, provide the name of the measure.
+          <br>
+	  Limit: 100 characters.
+          <br>
+        <br>
+        </div>
+
+        <a name="Result_Baseline_Measure_description"></a>
+        <STRONG><a name="BaselineDescription">Baseline Measure Description</a></STRONG>
+        <br>
+        Definition: Additional descriptive information about the baseline measure, such as a description of the metric used to characterize the specific baseline measure.
+        <br>
+	Limit: 600 characters.
+        <br>
+        <br>
+
+        <a name="Result_Baseline_Measure_type"></a>
+        <STRONG><a name="BaselineParamType">Measure Type</a></STRONG>
+        <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+        <br>
+        Definition: The type of data for the baseline measure. Select one.
+        <ul type=disc>
+          <li>Count of Participants
+              <li>Mean
+              <li>Median
+              <li>Least Squares Mean
+              <li>Geometric Mean
+              <li>Geometric Least Squares Mean
+              <li>Number
+              <li>Count of Units
+        </ul>
+
+        <a name="Result_Baseline_Measure_dispersionType"></a>
+        <STRONG><a name="BaselineDispersType">Measure of Dispersion</a></STRONG>
+        <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+        <br>Select one.
+        <ul type=disc>
+          <li>Not Applicable (only if Measure Type is "Number", "Count of Participants", or "Count of Units")
+          <li>Standard Deviation
+          <li>Inter-Quartile Range
+          <li>Full Range
+        </ul>
+      <br>
+
+
+      <a name="Result_Baseline_Measure_Data_analysisPopulation"></a>
+      <STRONG>Number of Baseline Participants</STRONG>
+      <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+      <br>
+      Definition: The number of participants analyzed for the baseline measure, if different from the Overall 
+      Number of Baseline Participants, in each arm/group and the entire study population (total).
+      <br>
+      <br>
+
+      <STRONG>Number of Units Analyzed</STRONG>
+      <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+      <br>
+      Definition: The number of units analyzed for the baseline measure, if different from the Overall Number 
+      of Units Analyzed, in each arm/group and the entire study population (total).
+      <br>
+      <br>
+
+      <a name="Result_Baseline_Measure_selectAnalysisPop"></a>
+      <STRONG>Analysis Population Type</STRONG>
+      <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+      <br>
+      Definition: Indicate whether the baseline measure analysis is based on participants or units other than participants. Only applies if Type of Units Analyzed is specified. Select Participants/Other Units.
+      <br>
+      <br>
+
+      <STRONG>Measure Analysis Population Description</STRONG>
+      <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+      <br>
+      Definition: Explanation of how the number of participants (or units) for analysis was determined, if different from the Overall Number of Participants [or Units] Analyzed.
+      <br>
+      Limit: 350 characters.
+      <br>
+      <br>
+
+    <a name="Result_Baseline_Measure_Category"></a>
+    <a name="Result_Baseline_Measure_categoryTitle"></a>
+    <a name="Result_Baseline_Measure_Data_categoryName"></a>
+    <STRONG><a name="CategoryTitle">Category  or Row Title</a></STRONG>
+     <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+    <br>
+    Definition: Name of distinct category or row for a baseline measure, if any. Category Titles are only for mutually exclusive and exhaustive categories summarizing data using the Measure Type of a "Count of Participants" or "Count of Units." Row Titles are for any type of data.
+    <br>
+    Limit: 50 characters.
+    <br>
+    <br>
+
+    <a name="Result_Baseline_Measure_data"></a>
+    <STRONG><a name="BaselineData">Baseline Measure Data</a></STRONG>
+    <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+    <br> 
+    Definition: The value(s) for each baseline measure, for each arm/group and the entire study population (total).
+    <br>
+    <br>
+
+    <div class=indented>
+      <a name="Result_Baseline_Measure_Data_naComment"></a>
+      <STRONG><a name="BaselineNaComment">NA (Not Available) Explanation</a></STRONG>
+          <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span> 
+      <br>
+      Definition: Explain why baseline measure data are not available, if "NA" is reported for Baseline Measure Data.
+    <br>
+    Limit: 250 characters.
+    <br>
+    <br>
+    </div>
+
+      <a name="Result_Baseline_Measure_unitOfMeasure"></a>
+      <STRONG><a name="BaselineUnitOfMeasure">Unit of Measure</a></STRONG>
+      <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+      <br>
+      Definition: An explanation of what is quantified by the data (for example, participants, mm Hg), for each baseline measure.
+      <br>
+      Limit: 40 characters.
+      <br>
+      <br>
+
+
+    </div> <!-- end baseline measure -->
+    </div> <!-- end baseline indented content -->
+    </div> <!-- end baseline section body -->
+    
+    <!-- DE 3 -->
+    <a name="Result_Outcome_Measure"></a>
+    <P></P>
+    <div class="sectionLabel" id="Result_Outcome_MeasureLabel">
+    <img id="Result_Outcome_MeasureImg" src="images/collapse.png" class="toggleImage" alt=""/> <STRONG>3. Outcome Measures</STRONG></div>
+    <div id="Result_Outcome_MeasureBody" class="sectionBody">
+    <br>A table of data for each primary and secondary outcome measure by arm (that is, initial assignment of participants to arms or groups) or comparison group (that is, analysis groups), including the result(s) of scientifically appropriate statistical analyses that were performed on the outcome measure data, if any. 
+<p>
+<u>Note</u>: Outcome measure information from the Protocol Section of the record will be copied into the Results Section the first time results are created.
+
+    </p>
+
+   <div class=indented> <!-- start indented Outcome Measure -->
+
+      <STRONG><a name="OutcomeMeasure">Outcome Measure Information</a></STRONG>
+      <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+      <br>Definition: A description of each outcome measure.
+      <br>
+      <br>
+      <u>Note</u>: "Outcome measure" means a pre-specified measurement that is used to determine the effect of an experimental variable on participants in the study. Post-hoc (that is, not pre-specified) outcome measures may also be reported.
+      <br>
+      <br>
+
+      <div class=indented> <!-- start Outcome Measure -->
+       <a name="Result_Outcome_Measure_outMeasureType"></a>
+        <STRONG><a name="OutcomeMeasureType">Outcome Measure Type</a></STRONG>
+        <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+        <br>
+        Definition: The type of outcome measure. Select one.
+        <ul type=disc>
+          <li>Primary
+          <li>Secondary
+          <li>Other Pre-specified
+          <li>Post-Hoc
+        </ul>
+
+        <a name="Result_Outcome_Measure_title"></a>
+        <STRONG><a name="OutcomeMeasureTitle">Outcome Measure Title</a></STRONG>
+        <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+        <br>
+        Definition: Name of the specific outcome measure. 
+        <br>
+        Limit: 255 characters.
+        <br>
+        <br>
+
+        <a name="Result_Outcome_Measure_description"></a>
+        <STRONG><a name="OutcomeMeasureDesc">Outcome Measure Description</a></STRONG>
+        <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+        <br>
+        Definition: Additional information about the outcome measure, including a description of the metric used to characterize the specific outcome measure, if not included in the Outcome Measure Title.
+        <br>
+        Limit: 999 characters.
+        <br>
+        <br>
+
+        <a name="Result_Outcome_Measure_timeFrame"></a>
+        <STRONG><a name="OutcomeMeasureTimeFrame">Outcome Measure Time Frame</a></STRONG>
+        <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+        <br>
+        Definition: Time point(s) at which the measurement was assessed for the specific metric used. The description of the time point(s) of assessment must be specific to the outcome measure and is generally the specific duration of time over which each participant is assessed (not the overall duration of the study).
+        <br>
+        Limit: 255 characters.
+        <br>
+        <br>
+
+        <a name="Result_Outcome_Measure_anticipatedPostDate"></a>
+        <STRONG><a name="OutcomeAnticipatedPostDate">Anticipated Reporting Date</a></STRONG>
+        <br>
+        Definition: If Outcome Measure Data are not included for an outcome measure, provide the expected month and year they will be submitted.
+        <br>
+        <br>
+
+        <a name="Result_Outcome_Measure_ArmGroup"></a>
+        <STRONG><a name="OutcomeArmGroup">Arm/Group Information</a></STRONG>
+        <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+        <br>
+        Definition: Arms or comparison groups in the study, including all arms or comparison groups based on the pre-specified protocol and/or statistical analysis plan.
+        <br>
+        <br>
+
+
+      <div class=indented>
+        <a name="Result_Outcome_Measure_ArmGroup_title"></a>
+        <STRONG><a name="OutcomeArmGroupTitle">Arm/Group Title</a></STRONG>
+        <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+        <br>
+        Definition: Descriptive label used to identify each arm or comparison group.
+        <br>
+	Limit: >= 4 and <= 62 characters.
+        <br>
+        <br>
+
+        <a name="Result_Outcome_Measure_ArmGroup_description"></a>
+        <STRONG><a name="OutcomeArmGroupDesc">Arm/Group Description</a></STRONG>
+        <span style="color:#CC0000; font-weight:bold; font-size:x-large">*</span><span style="color:#000099; font-weight:bold;">&#167;</span>
+        <br>
+        Definition: Brief description of each arm or comparison group. In general, it must include sufficient detail to understand how the arm(s) or comparison groups were derived from the arm(s) to which participants were assigned in Participant Flow (if different) and the intervention strategy in each arm/group.  
+        <br>
+	Limit: 999 characters.
+        <br>
+        <br>
+      </div>  <!-- end Arm/Group -->
+
+      <!-- Analysis Population Information -->
+      <STRONG><a name="AnalysisPopulationInformation">Analysis Population Information</a></STRONG>
+      <br>
+      <br>
+
+      <div class=indented>
+      <a name="Result_Outcome_Measure_ArmGroup_numParticipantAnalyzed"></a>
+      <STRONG><a name="SubjectsAnalyzed">Overall Number of Participants Analyzed</a></STRONG>
+      <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+      <br>
+      Definition: Number of participants for whom an outcome measure was measured and analyzed, for each outcome measure and each arm/group. 
+      <br>
+      <br>
+
+        <a name="Result_Outcome_Measure_typeUnitAnalyzed"></a>
+        <STRONG><a name="TypeUnitsAnalyzed">Type of Units Analyzed</a>
+          <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+        </STRONG>
+        <br>
+        Definition: If the analysis is based on a unit other than participants, a description of the unit of analysis (for example, eyes, lesions, implants). 
+        <br>
+	Limit: 40 characters.
+        <br>
+        <br>
+
+      <a name="Result_Outcome_Measure_ArmGroup_numUnitsAnalyzed"></a>
+        <STRONG><a name="NumUnitsAnalyzed">Overall Number of Units Analyzed</a></STRONG>
+          <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+      <br>
+      Definition: If the analysis is based on a unit other than participants, the number of units for which an outcome was measured and analyzed, for each outcome measure and each arm/group.
+      <br>
+      <br>
+
+      <a name="Result_Outcome_Measure_populationAnalysisDesc"></a>
+      <STRONG><a name="AnalysisPopulation">Analysis Population Description</a></STRONG>
+          <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+      <br>
+      Definition: If the Number of Participants Analyzed or Number of Units Analyzed differs from the number of participants or units assigned to the arm or comparison group, a brief description of the reason for the difference (such as how the analysis population was determined). 
+      <br>
+      Limit: 350 characters.
+      <br>
+      <br>
+      </div> <!-- Overall Participants Analyzed -->
+
+        <STRONG><a name="OutcomeMeasureDataTable">Outcome Measure Data Table</a></STRONG>
+        <br>
+        <br>
+
+        <a name="Result_Outcome_Measure_measureType"></a>
+        <STRONG><a name="OutcomeMeasureParamType">Measure Type</a></STRONG>
+        <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+        <br>
+        Definition: The type of data for the outcome measure. Select one.
+        <ul type=disc>
+          <li>Count of Participants
+            <li>Mean
+            <li>Median
+            <li>Least Squares Mean
+            <li>Geometric Mean
+            <li>Geometric Least Squares Mean
+            <li>Number
+            <li>Count of Units
+        </ul>
+
+          <a name="Result_Outcome_Measure_dispersionType"></a>
+          <STRONG><a name="OutcomeMeasureDispersType">Measure of Dispersion/Precision</a></STRONG>
+          <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+          <br>
+          Select one.
+          <ul type=disc>
+            <li>Not Applicable (only if Measure Type is "Number," "Count of Participants," or "Count of Units")</li>
+            <li>Standard Deviation</li>
+            <li>Standard Error</li>
+            <li>Inter-Quartile Range</li>
+            <li>Full Range</li>
+            <li>80% Confidence Interval</li>
+            <li>90% Confidence Interval</li>
+            <li>95% Confidence Interval</li>
+            <li>97.5% Confidence Interval</li>
+            <li>99% Confidence Interval</li>
+            <li>Other Confidence Interval Level</li>
+            <li>Geometric Coefficient of Variation (only when Measure Type is "Geometric Mean")</li>
+          </ul>
+
+    <div class=indented>
+        <STRONG><a name="Result_Outcome_Measure_ciPctLevel">Other Confidence Interval Level</a></STRONG>
+          <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+    <br>
+    Definition: The numerical value for the confidence interval level, if "Other Confidence Interval Level" is selected. Provide a rationale for choosing this level in the Outcome Measure Description.
+    <br>
+    </div>
+      <br>
+
+    <a name="Result_Outcome_Measure_Category"></a>
+    <a name="Result_Outcome_Measure_categoryTitle"></a>
+    <STRONG><a name="OutcomeCategoryTitle">Category or Row Title</a></STRONG>
+    <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+    <br>
+    Definition: Name of distinct category or row for an outcome measure, if any. Category Titles are only for mutually exclusive and exhaustive categories summarizing data using the Measure Type of a "Count of Participants" or "Count of Units". Row Titles are for any type of data.
+    <br>
+    Limit: 50 characters.
+    <br>
+    <br>
+
+    <div class=indented>
+    <a name="Result_Outcome_Measure_Data_analysisPopulation"></a>
+      <STRONG>Number of Participants Analyzed</STRONG>
+      <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+      <br>
+      Definition: The number of participants analyzed for the outcome measure in the row and for each arm/group, if different from the overall Number of Participants Analyzed.
+      <br>
+      Limit: 50 characters.
+      <br>
+      <br>
+
+      <STRONG>Number of Units Analyzed</STRONG>
+      <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+      <br>
+      Definition: The number of units analyzed for the outcome measure in the row and for each arm/group, if different from the overall Number of Units Analyzed.
+      <br>
+      <br>
+    </div>
+
+    <a name="Result_Outcome_Measure_data"></a>
+    <STRONG><a name="OutcomeData">Outcome Measure Data</a></STRONG>
+    <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+    <br>
+    Definition: The measurement value(s) for each outcome measure, including each category/row and each arm/group.
+    <br>
+    <br>
+
+    <div class=indented>
+      <a name="Result_Outcome_Measure_Data_naComment"></a>
+      <STRONG><a name="OutcomeNaComment">NA (Not Available) Explanation</a></STRONG>
+        <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+      <br>
+      Definition: Explain why outcome measure data are not available, if "NA" is reported for Outcome Measure Data.
+      <br>
+      Limit: 250 characters.
+      <br>
+      <br>
+    </div>
+
+
+        <a name="Result_Outcome_Measure_unitOfMeasure"></a>
+        <STRONG><a name="OutcomeUnitOfMeasure">Unit of Measure</a></STRONG>
+        <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+        <br>
+        Definition: An explanation of what is quantified by the data (for example, participants, mm Hg), for each outcome measure.
+        <br>
+        Limit: 40 characters.
+        <br>
+        <br>
+        <br>
+    </div>
+
+   <!-- ========================================================================================================= -->
+   <!-- start Outcome Measure Statistical Analysis -->
+   <!-- ========================================================================================================= -->
+   <a name="Result_Outcome_Analysis"></a>
+    <STRONG><a name="Analyses">Statistical Analyses</a></STRONG>
+    <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+    <br> 
+Definition: Result(s) of scientifically appropriate tests of statistical significance of the primary and secondary outcome measures, if any. Such analyses include: pre-specified in the protocol and/or statistical analysis plan; made public by the sponsor or responsible party; conducted on a primary outcome measure in response to a request made by FDA. 
+<p>
+If a statistical analysis is reported "Comparison Group Selection" and "Type of Statistical Test" are required. In addition, one of the following data elements are required with the associated information: "P-Value," "Estimation Parameter," or "Other Statistical Analysis."
+    <br>
+
+    <div class=not_indented>
+      <STRONG><a name="AnalysisOverview">Statistical Analysis Overview</a></STRONG>
+      <br>
+      Definition: Summary description of the analysis performed.
+      <br>
+      <br>
+
+        <STRONG><a name="GroupSelection">Comparison Group Selection</a></STRONG>
+        <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+        <br>
+        Definition: The arms or comparison groups involved in the statistical analysis (check all to indicate an "omnibus" analysis).
+        <br>
+        <br>
+
+        <div class=indented>
+          <a name="Result_Outcome_Analysis_statsAnalysisComment"></a>
+          <STRONG><a name="GroupSelectionComments">Comments</a></STRONG>
+          <br>
+          Definition: Additional details about the statistical analysis, such as null hypothesis and description of power calculation.
+          <br>
+          Limit: 500 characters.
+          <br>
+          <br>
+        </div>
+
+        <a name="Result_Outcome_Analysis_statsTestTypes"></a>
+        <STRONG><a name="StatsTestType">Type of Statistical Test</a></STRONG>
+        <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+        <br>
+        Definition: Identifies the type of analysis. Select one.
+        <ul type=disc>
+            <li>Superiority</li>
+            <li>Non-inferiority</li>
+            <li>Equivalence</li>
+            <li>Other (for example, single group or other descriptive analysis)</li>
+            <li>Non-Inferiority or Equivalence (<em>legacy selection</em>)</li>
+            <li>Superiority or Other (<em>legacy selection</em>)</li>
+        </ul>
+        
+        <div class=indented>
+          <a name="Result_Outcome_Analysis_statsTestTypesComment"></a>
+          <STRONG><a name="GroupSelectionComments">Comments</a></STRONG>
+          <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+          <br>
+Definition: If, "Non-inferiority" or "Equivalence," provide additional details, including details of the power calculation (if not previously provided), definition of non-inferiority or equivalence margin, and other key parameters.
+          <br>
+          Limit: 500 characters.
+          <br>
+          <br>
+        </div>
+
+      <STRONG><a name="StatsTest">Statistical Test of Hypothesis</a></STRONG> (<em>or Method of Estimation or Other Statistical Analysis required</em>) 
+
+      <br>
+      Definition: Procedure used for statistical analysis of outcome measure data and the calculated p-value.
+      <br>
+      <br>
+        <div class=indented>
+          <a name="Result_Outcome_Analysis_pValue"></a>
+          <STRONG><a name="PValue">P-Value</a></STRONG>
+          <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+          <br>
+          Definition: Calculated p-value given the null-hypothesis
+          <br>
+          <br>
+
+          <div class=indented>
+            <a name="Result_Outcome_Analysis_pValueComment"></a>
+            <STRONG><a name="PValueComments">Comments</a></STRONG>
+            <br>
+            Definition: Additional information, such as whether the p-value is adjusted for multiple comparisons and the <em>a priori</em> threshold for statistical significance
+            <br>
+	    Limit: 250 characters.
+            <br>
+            <br>
+          </div>
+
+          <a name="Result_Outcome_Analysis_method"></a>
+          <STRONG><a name="Method">Method</a></STRONG>
+          <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+          <br>
+          Definition: The statistical test used to calculate the p-value, if a P-Value is reported. Select one.
+          <br>
+          <ul type=disc style="margin-left:14px">
+            <li>ANCOVA</li>
+            <li>ANOVA</li>
+            <li>Chi-Squared</li>
+            <li>Chi-Squared, Corrected</li>
+            <li>Cochran-Mantel-Haenszel</li>
+            <li>Fisher Exact</li>
+            <li>Kruskal-Wallis</li>
+            <li>Log Rank</li>
+            <li>Mantel Haenszel</li>
+            <li>McNemar</li>
+            <li>Mixed Models Analysis</li>
+            <li>Regression, Cox</li>
+            <li>Regression, Linear</li>
+            <li>Regression, Logistic</li>
+            <li>Sign Test</li>
+            <li>t-Test, 1-Sided</li>
+            <li>t-Test, 2-Sided</li>
+            <li>Wilcoxon (Mann-Whitney)</li>
+            <li>Other</li>
+          </ul>
+
+          <div class=indented>
+            <a name="Result_Outcome_Analysis_otherMethodName"></a>
+            <STRONG><a name="OtherMethod">Other Method Name</a></STRONG>
+            <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+            <br>
+            Definition: If "Other" is selected, provide name of statistical test.
+            <br>
+	    Limit: 40 characters.
+            <br>
+            <br>
+
+            <a name="Result_Outcome_Analysis_methodComment"></a>
+            <STRONG><a name="OtherMethodComments">Comments</a></STRONG>
+            <br>
+            Definition: Any other relevant information about the statistical test, such as adjustments or degrees of freedom.
+            <br>
+	    Limit: 150 characters.
+            <br>
+            <br>
+          </div>
+        </div>
+
+      <STRONG><a name="EstimateMethod">Method of Estimation</a></STRONG> (<em>or Statistical Test of Hypothesis or Other Statistical Analysis required</em>)
+      <br>
+      Definition: Procedure used to estimate effect of intervention.
+      <br>
+      <br>
+
+        <div class=indented>
+            <a name="Result_Outcome_Analysis_estimParameter"></a>
+            <STRONG><a name="EstParamType">Estimation Parameter</a></STRONG>
+            <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+            <br>Select one.
+            <ul type=disc style="margin-left:14px">
+              <li>Cox Proportional Hazard
+              <li>Hazard Ratio (HR)
+              <li>Hazard Ratio, Log
+              <li>Mean Difference (Final Values)
+              <li>Mean Difference (Net)
+              <li>Median Difference (Final Values)
+              <li>Median Difference (Net)
+              <li>Odds Ratio (OR)
+              <li>Odds Ratio, Log
+              <li>Risk Difference (RD)
+              <li>Risk Ratio (RR)
+              <li>Risk Ratio, Log
+              <li>Slope
+              <li>Other
+            </ul>
+
+            <div class=indented>
+              <a name="Result_Outcome_Analysis_otherParameterName"></a>
+              <STRONG><a name="OtherParamType">Other Parameter Name</a></STRONG>
+              <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+              <br>
+              Definition: The name of the estimation parameter, if “Other” Estimation Parameter is selected.
+              <br>
+              Limit: 40 characters.
+            </div>
+            <br>
+        </div>
+
+        <div class=indented>
+            <a name="Result_Outcome_Analysis_estimValue"></a>
+            <STRONG><a name="EstValue">Estimated Value</a></STRONG>
+            <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+            <br>
+            Definition: The calculated value for the estimation parameter.
+            <br>
+        </div>
+        <br>
+
+        <div class=indented>
+          <STRONG><a name="ConfInterval">Confidence Interval</a></STRONG>
+          (<em>If applicable</em>)
+          <br>
+          <br>
+          <div class=indented>
+            <a name="Result_Outcome_Analysis_ciLevel"></a>
+            <STRONG><a name="ConfLevel">Level</a></STRONG>
+            <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+            <br>Expressed as a percentage.
+            <br>
+            <br>
+
+            <a name="Result_Outcome_Analysis_ciNumSides"></a>
+            <STRONG><a name="CINumberSides">Number of Sides</a></STRONG>
+            <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+            <br>Select 1-sided or 2-sided.
+            <br>
+            <br>
+
+            <a name="Result_Outcome_Analysis_ciLowerLimit"></a>
+            <STRONG><a name="LowerLimit">Lower Limit</a></STRONG>
+            <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+            <br>Definition: Required if confidence interval is "2-sided" or if confidence interval is "1-sided" and no Upper Limit is entered.
+            <br>
+            <br>
+
+            <a name="Result_Outcome_Analysis_ciUpperLimit"></a>
+            <STRONG><a name="UpperLimit">Upper Limit</a></STRONG>
+            <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+            <br>
+            Definition: Required if confidence interval is "2-sided" or if confidence interval is "1-sided" and no Lower Limit is entered. 
+            <br>
+            <br>
+
+            <STRONG><a name="Result_Outcome_Analysis_ciUpperLimitNaComment">NA (Not Available) Explanation</a></STRONG>
+            <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+            <br>
+            Definition: Explain why the upper limit data are not available, if "NA" is reported as upper-limit of "2-sided" confidence interval.
+            <br>
+	    Limit: 250 characters.
+            <br>
+            <br>
+            </div>
+
+
+            <div class=not_indented>
+              <a name="Result_Outcome_Analysis_dispersionType"></a>
+              <STRONG><a name="EstDispersType">Parameter Dispersion Type</a></STRONG>
+              <br>
+              Select one.
+              <ul type=disc style="margin-left:14px">
+                <li> Standard Deviation
+                <li> Standard Error of the Mean
+              </ul>
+
+
+            <div class=not_indented>
+              <a name="Result_Outcome_Analysis_dispersionValue"></a>
+              <STRONG><a name="EstDispersAmount">Dispersion Value</a></STRONG>
+              <br>
+              Definition: The calculated value for the dispersion of the estimated parameter.
+              <br>
+              <br>
+            </div>
+
+              <a name="Result_Outcome_Analysis_estimationComment"></a>
+              <STRONG><a name="EstComments">Estimation Comments</a></STRONG>
+              <br>
+              Definition: Any other relevant estimation information, including the direction of the comparison (for example, describe which arm or comparison group represents the numerator and denominator for relative risk).
+              <br>
+	      Limit: 250 characters.
+              <br>
+              <br>
+            </div>
+          </div>
+        </div>
+        <a name="Result_Outcome_Other_Analysis"></a>
+        <STRONG><a name="OtherStats">Other Statistical Analysis</a></STRONG>
+        <br>
+Definition: If the statistical analysis cannot be submitted using the Statistical Test of Hypothesis or Method of Estimation options, provide a description and the results of any other scientifically appropriate tests of statistical significance.  
+        <br>
+        <br>
+   <!-- ========================================================================================================= -->
+   <!-- end Outcome Measure Statistical Analysis -->
+   <!-- ========================================================================================================= -->
+
+
+   </div>  <!-- end indented Outcome Measure -->
+   </div> <!-- end  outcome measure section body -->
+
+    <!-- DE 4 -->
+    <a name="Result_AdverseEvents"></a><a name="AdverseEvents"></a>
+    <P></P>
+    <div class="sectionLabel" id="Result_AdverseEventsLabel">
+    <img id="Result_AdverseEventsImg" src="images/collapse.png" class="toggleImage" alt=""/> <STRONG>4. Adverse Event Information</STRONG></div>
+    <div id="Result_AdverseEventsBody" class="sectionBody">
+    <br>
+    Information for completing three tables summarizing adverse events.
+
+      <ol>
+    <li><p>All-Cause Mortality:
+        <span style="color:#CC0000; font-weight:bold; font-size:x-large">*</span><span style="color:#000099; font-weight:bold;">&#167;</span>
+	A table of <em>all</em> anticipated and unanticipated deaths due to any cause, with the number and 
+	frequency of such events by arm or comparison group of the clinical study.
+    </li>
+    <li><p>Serious Adverse Events: 
+        <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+A table of <em>all</em> anticipated and unanticipated serious
+    adverse events, grouped by organ system, with the number and frequency
+    of such events by arm or comparison group of the clinical study.
+(<em>See <a href="#AdverseEventsDefinition">Adverse Events</a> definition below</em>).
+    </p>
+    </li>
+    <li><p>Other (Not Including Serious) Adverse Events:
+        <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+	A table of anticipated and unanticipated events (not included in the serious adverse event table) that exceed 
+	a frequency threshold (for example, 5 percent) within any arm of the clinical study, grouped by organ system, 
+	with the number and frequency of such events by arm or comparison group of the clinical study.
+    </li>
+      </ol>
+
+
+    <div class=indented>
+      <p>
+      <a name="Result_AdverseEvents_timeFrame"></a>
+      <div><a name="ReportedEventsTimeFrame"></a>
+      <STRONG>Time Frame</STRONG> 
+        <span style="color:#CC0000; font-weight:bold; font-size:x-large">*</span><span style="color:#000099; font-weight:bold;">&#167;</span>
+        <br>
+        Definition: The specific period of time over which adverse event data were collected.
+        <br>
+	Limit: 500 characters.
+        <br>
+      </div>
+      <p>
+      <a name="Result_AdverseEvents_additDescription"></a>
+      <div><a name="ReportedEventsNotes"></a>
+      <STRONG>Adverse Event Reporting Description</STRONG> 
+        <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+       <br>
+Definition: If the adverse event information collected in the clinical study is collected based on a different definition of adverse event and/or serious adverse event than the <a href="#AdverseEventsDefinition">Adverse Events</a> definition below, a brief description of how the definitions differ. May also be used to provide any additional relevant information about adverse event collection, including details about the method of systematic assessment (for example, daily questionnaire) or information about how the analysis population was determined (if the Number of Participants at Risk differs from the number of participants assigned to the arm or comparison group).
+       <br>
+        Limit: 500 characters.
+        <br>
+      </div>
+
+      <br>
+      <div>
+      <a name="Result_AdverseEvents_defaultSourceVocabulary"></a>
+      <a name="ReportedEventsSourceVocab"></a>
+      <STRONG>Source Vocabulary Name for Table Default</STRONG>
+      <br>
+Definition: Standard terminology, controlled vocabulary, or classification and version from which adverse event terms are drawn, if any (for example, SNOMED&nbsp;CT, MedDRA&nbsp;10.0). Default value for Source Vocabulary Name to be applied to all adverse event terms entered in the "Serious Adverse Event" and "Other (Not Including Serious) Adverse Event" tables. If necessary, Source Vocabulary Name may also be specified for specific Adverse Event Terms.
+      <br>
+      Limit: 20 characters.
+      <br>
+      </div>
+      <br>
+      <div>
+      <a name="Result_AdverseEvents_defaultAssessmentType"></a>
+      <a name="ReportedEventsAssessmentType"></a>
+      <STRONG>Collection Approach for Table Default</STRONG>
+        <span style="color:#CC0000; font-weight:bold; font-size:x-large">*</span><span style="color:#000099; font-weight:bold;">&#167;</span>
+(<em>or Collection Approach for each Adverse Event Term required</em>)
+<br>
+Definition: The type of approach taken to collect adverse event information. Default value for the type of approach taken to collect adverse event information (Systematic or Non-Systematic Assessment) to be applied to all adverse event terms entered in the "Serious Adverse Event" or "Other (Not Including Serious) Adverse Event" tables. If necessary, Collection Approach may also be specified for specific Adverse Event Terms. Select one.
+<ul>
+<li>
+Systematic Assessment: Any method of routinely determining whether or not certain adverse events have occurred, for example through a standard questionnaire, regular investigator assessment, regular laboratory testing, or other method
+<li>
+Non-Systematic Assessment: Any non-systematic method for determining whether or not adverse events have occurred, such as self-reporting by participants or occasional assessment/testing
+</ul>
+      </div>
+
+      <br>
+      <a name="Result_AdverseEvents_ArmGroup"></a>
+      <STRONG>Arm/Group Information</STRONG>
+      <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+      <br>
+Definition: Arms or comparison groups in the study, including all arms or comparison groups based on the pre-specified protocol and/or statistical analysis plan.
+      <br>
+      <br>
+
+      <div class=indented>
+        <a name="Result_AdverseEvents_ArmGroup_title"></a>
+        <STRONG><a name="EventArmGroupTitle">Arm/Group Title</a></STRONG>
+        <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+        <br>
+Definition: Label used to identify each arm or comparison group.
+        <br>
+	Limit: >=4 and <= 62 characters.
+        <br>
+        <br>
+
+        <a name="Result_AdverseEvents_ArmGroup_description"></a>
+        <STRONG><a name="EventArmGroupDesc">Arm/Group Description</a></STRONG>
+        <span style="color:#CC0000; font-weight:bold; font-size:x-large">*</span><span style="color:#000099; font-weight:bold;">&#167;</span>
+        <br>
+Definition: Brief description of each arm or comparison group. In general, it must include sufficient detail to understand how the arm(s) or comparison groups were derived from the arm(s) to which participants were assigned in Participant Flow and the intervention strategy in each arm/group. 
+        <br>
+	Limit: 999 characters.
+        <br>
+      </div>
+
+      <br><STRONG><a name="AdverseEventsDefinition">Adverse Events</a></STRONG>
+      <br>
+Definition: Any untoward or unfavorable medical occurrence in a participant, including any abnormal sign (for example, abnormal physical exam or laboratory finding), symptom, or disease, temporally associated with the participant’s participation in the research, whether or not considered related to the participant’s participation in the research.
+      <br>
+      <br>
+Three types of adverse event data are to be reported: "All-Cause Mortality," "Serious," and "Other (Not Including Serious)" Adverse Events.
+<ol>
+<li>All-Cause Mortality: The occurrence of death due to any cause.
+<p>
+</li>
+<li>
+Serious Adverse Events: Include adverse events that result in any of the following outcomes: death, a life-threatening adverse event, inpatient hospitalization or prolongation of existing hospitalization, a persistent or significant incapacity or substantial disruption of the ability to conduct normal functions, or a congenital anomaly/birth defect. Important medical events that may not result in death, be life-threatening, or require hospitalization may be considered serious when, based upon appropriate medical judgment, they may jeopardize the participant and may require medical or surgical intervention to prevent one of the outcomes listed in this definition. 
+<p>
+</li>
+<li>Other (Not Including Serious) Adverse Events: Adverse events that are not Serious Adverse Events.
+</li>
+      </ol>
+
+      <div>
+      <a name="Mortality_Affected"></a>
+      <STRONG>Total Number Affected by All-Cause Mortality</STRONG>
+      <span style="color:#CC0000; font-weight:bold; font-size:x-large">*</span><span style="color:#000099; font-weight:bold;">&#167;</span>
+      <br>
+Definition: Overall number of participants, in each arm/group, who died due to any cause.
+      <br>
+      <br>
+      </div>
+
+      <div>
+      <a name="Mortality_AtRisk"></a>
+      <STRONG>Total Number at Risk for All-Cause Mortality</STRONG>
+      <span style="color:#CC0000; font-weight:bold; font-size:x-large">*</span><span style="color:#000099; font-weight:bold;">&#167;</span>
+      <br>
+Definition: Overall number of participants, in each arm/group, included in the assessment of deaths due to any cause (that is, the denominator for calculating frequency of all-cause mortality).
+      <br>
+      <br>
+      </div>
+
+      <a name="SeriousAE_Affected"></a>
+      <div>
+      <STRONG><a name="SeriousTotalAffected">Total Number Affected by Any Serious Adverse Event</a></STRONG>
+      <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+      <br>
+Definition: Overall number of participants affected by one or more Serious Adverse Events, for each arm/group.
+      <br>
+      <br>
+      </div>
+
+      <div>
+      <a name="SeriousAE_AtRisk"></a>
+      <STRONG>Total Number at Risk for Serious Adverse Events</STRONG>
+      <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span> (<em>or Number at Risk for each Serious Adverse Event Term required</em>)
+        <br>
+Definition: Overall number of participants included in the assessment of serious adverse events (that is, the denominator for calculating frequency of serious adverse events), for each arm/group.
+      <br>
+      <br>
+      </div>
+
+      <div>
+      <a name="Result_AdverseEvents_Other_freqRptThreshold"></a>
+      <STRONG><a name="FrequencyThreshold">Frequency Threshold for Reporting Other (Not Including Serious) Adverse Events</a></STRONG>
+      <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+      <br>
+Definition: Specify the frequency of occurrence that an Other (Not Including Serious) Adverse Event must exceed, within any arm or comparison group, to be reported in the Other (Not Including Serious) Adverse Event table. The number for the frequency threshold must be less than or equal to the allowed maximum (5%). Do not include symbols (for example, > or %) in the data field, it will be expressed as a percentage.
+      <p>
+For example, a threshold of 5 percent indicates that all Other (Not Including Serious) Adverse Events with a frequency greater than 5 percent within at least one arm or comparison group are reported.
+      <br>
+      </div>
+
+      <div>
+      <a name="OtherAE_Affected"></a>
+      <STRONG><a name="OtherTotalAffected">Total Number Affected by Any Other (Not Including Serious) Adverse Event Above
+      the Frequency Threshold</a></STRONG>
+      <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+      <br>
+Definition: Overall number of participants affected, for each arm/group, by at least one Other (Not Including Serious) Adverse Event(s) reported in the table. Adverse events reported in the table are those that occurred at a frequency exceeding the specified Frequency Threshold (for example, 5%) within at least one arm or comparison group.
+      <br>
+      <br>
+      </div>
+
+      <div>
+      <a name="OtherAE_AtRisk"></a>
+      <STRONG>Total Number at Risk for Other (Not Including Serious) Adverse Events</STRONG>
+      <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span> (<em>or Number at Risk for each Other, <em>[Not Including Serious]</em>, Adverse Event Term required</em>)
+        <br>
+Definition: Overall number of participants, for each arm/group, included in the assessment of Other (Not Including Serious) Adverse Events during the study (that is, the denominator for calculating frequency of Other (Not Including Serious) Adverse Events).
+        <br>
+      </div>
+
+      <div class=indent0>
+      <a name="Result_AdverseEvents_Event_Serious_term"></a>
+      <a name="Result_AdverseEvents_Event_Other_term"></a>
+      <br><STRONG><a name="AdverseEventTerm">Adverse Event Term</a></STRONG>
+      <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+      <br>
+      Definition: Descriptive word or phrase for the adverse event.
+      <br>
+      Limit: 100 characters.
+      <br>
+
+      <div class=not_indented>
+      <a name="Result_AdverseEvents_Event_Serious_organSystem"></a>
+      <a name="Result_AdverseEvents_Event_Other_organSystem"></a>
+      <br><STRONG><a name="OrganSystem">Organ System</a></STRONG>
+      <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+      <br>
+Definition: High-level categories used to group adverse event terms by body or organ system. Select one. (Adverse events that affect multiple systems should be classified as "General disorders.")
+      <br>
+      <ul type=disc>
+        <li>Blood and Lymphatic System Disorders</li>
+        <li>Cardiac Disorders</li>
+        <li>Congenital, Familial and Genetic Disorders</li>
+        <li>Ear and Labyrinth Disorders</li>
+        <li>Endocrine Disorders</li>
+        <li>Eye Disorders</li>
+        <li>Gastrointestinal Disorders</li>
+        <li>General Disorders</li>
+        <li>Hepatobiliary Disorders</li>
+        <li>Immune System Disorders</li>
+        <li>Infections and Infestations</li>
+        <li>Injury, Poisoning and Procedural Complications</li>
+        <li>Investigations</li>
+        <li>Metabolism and Nutrition Disorders</li>
+        <li>Musculoskeletal and Connective Tissue Disorders</li>
+        <li>Neoplasms Benign, Malignant and Unspecified (Including Cysts and Polyps)</li>
+        <li>Nervous System Disorders</li>
+        <li>Pregnancy, Puerperium and Perinatal Conditions</li>
+        <li>Product Issues</li>
+        <li>Psychiatric Disorders</li>
+        <li>Renal and Urinary Disorders</li>
+        <li>Reproductive System and Breast Disorders</li>
+        <li>Respiratory, Thoracic and Mediastinal Disorders</li>
+        <li>Skin and Subcutaneous Tissue Disorders</li>
+        <li>Social Circumstances</li>
+        <li>Surgical and Medical Procedures</li>
+        <li>Vascular Disorders</li>
+      </ul>
+
+      <div>
+      <a name="Result_AdverseEvents_Event_Serious_additDescription"></a>
+      <a name="Result_AdverseEvents_Event_Other_additDescription"></a>
+      <a name="AdverseEventNotes"></a>
+      <STRONG>Adverse Event Term Additional Description</STRONG>
+      <br>
+Definition: Additional relevant information about the adverse event.
+      <br>
+      Limit: 250 characters.
+      <br>
+      </div>
+      <div>
+      <a name="Result_AdverseEvents_Event_Serious_sourceVocabulary"></a>
+      <a name="Result_AdverseEvents_Event_Other_sourceVocabulary"></a>
+      <br><STRONG><a name="AdverseEventVocab">Source Vocabulary Name</a></STRONG>
+      <br>
+Definition: Standard terminology, controlled vocabulary, or classification and version from which adverse event terms are drawn, if any (for example, SNOMED&nbsp;CT, MedDRA&nbsp;10.0). Leave blank to indicate that the value specified as the Source Vocabulary for Table Default should be used.
+      <br>
+      Limit: 20 characters.
+      <br>
+      </div>
+
+      <div>
+      <br>
+      <a name="Result_AdverseEvents_Event_Serious_assessmentType"></a>
+      <a name="Result_AdverseEvents_Event_Other_assessmentType"></a>
+      <STRONG><a name="AssessType">Collection Approach</a></STRONG>
+        <span style="color:#CC0000; font-weight:bold; font-size:x-large">*</span><span style="color:#000099; font-weight:bold;">&#167;</span>
+      (<em>or Collection Approach for Table Default required</em>)
+      <br>
+Definition: The type of approach taken to collect adverse event information. Select one or leave blank to indicate that the value specified as the Assessment Type for Table Default should be used.
+      <br>
+      <ul>
+    <li><p>
+Systematic Assessment: Any method of routinely determining whether or not certain adverse events have occurred, for example through a standard questionnaire, regular investigator assessment, regular laboratory testing, or other method
+    </li>
+    <li><p>
+Non-Systematic Assessment: Any non-systematic method for determining whether or not adverse events have occurred, such as self-reporting by participants or occasional assessment/testing
+    </li>
+      </ul>
+      </div>
+      </div>
+
+      <STRONG><a name="AdverseEventData">Adverse Event Data</a></STRONG>
+      <br>
+      <br>
+      
+      <div class=indented>
+      <a name="Result_AdverseEvents_Data_Serious_numAffected"></a>
+      <a name="Result_AdverseEvents_Data_Other_numAffected"></a>
+      <STRONG>Number of Participants Affected</STRONG>
+      <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+      <br>
+Definition: Number of participants, in each arm/group, experiencing at least one event being reported.
+      <br>
+      <br>
+      <a name="Result_AdverseEvents_Data_Other_numAtRisk"></a>
+      <a name="Result_AdverseEvents_Data_Serious_numAtRisk"></a>
+      <STRONG>Number of Participants at Risk</STRONG>
+      <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+      <br>
+Definition: Number of participants assessed, in each arm/group, for adverse events (that is, the denominator for calculating frequency of adverse events). Leave blank to indicate that the value specified as the total at risk in the arm/group for the table should be used.
+      <br>
+      <br>
+      <a name="Result_AdverseEvents_Data_Serious_numEvents"></a>
+      <a name="Result_AdverseEvents_Data_Other_numEvents"></a>
+      <a name="SeriousAE_Events"></a>
+      <a name="OtherAE_Events"></a>
+      <STRONG>Number of Events</STRONG>
+      <br>
+Definition: Number of occurrences, in each arm/group, of the adverse event being reported.
+      <br>
+      <br>
+      </div>
+    </div>
+    </div>
+    </div>
+    
+    <!-- DE 5 -->
+    <a name="Result_LimitationsAndCaveats_description"></a><a name="LimitCaveats"></a>
+    <p></p>
+    <div class="sectionLabel" id="Result_LimitationsAndCaveats_descriptionLabel">
+    <img id="Result_LimitationsAndCaveats_descriptionImg" src="images/collapse.png" class="toggleImage" alt=""/> <STRONG>5. Limitations and Caveats</STRONG></div>
+    <div id="Result_LimitationsAndCaveats_descriptionBody" class="sectionBody">
+    <br>
+    <div class=indented>
+    <STRONG><a name="AdverseEventData">Overall Limitations and Caveats</a></STRONG>
+    <br>
+Definition: Describe significant limitations of the study. Such limitations may include not reaching the target number of participants needed to achieve target power and statistically reliable results or technical problems with measurements leading to unreliable or uninterpretable data.
+    <br>
+    Limit: 250 characters.
+    <br>
+    <br>
+    </div>
+    </div>
+
+    <!-- DE 6 -->
+    <a name="Result_CertainAgreement"></a>
+    <P></P>
+    <div class="sectionLabel" id="Result_CertainAgreementLabel">
+    <img id="Result_CertainAgreementImg" src="images/collapse.png" class="toggleImage" alt=""/> <STRONG>6. Certain Agreements</STRONG></div>
+    <div id="Result_CertainAgreementBody" class="sectionBody">
+<br>
+Information indicating whether there exists an agreement between the sponsor or its agent and the principal investigators (unless the sponsor is an employer of the principal investigators) that restricts in any manner the ability of the principal investigators (PIs), after the completion of the study, to discuss the results of the study at a scientific meeting or any other public or private forum, or to publish in a scientific or academic journal information concerning the results of the study. This does not include an agreement solely to comply with applicable provisions of law protecting the privacy of participants.
+    <br>
+    <br>
+    <div class=indented>
+      <a name="Result_CertainAgreement_piEmployeeOfSponsor"></a>
+      <STRONG><a name="PIEmployment">Are all PIs Employees of Sponsor?</a></STRONG>
+      <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+      <br>
+Definition: Indicate whether the principal investigator is an employee of the sponsor. Select one.
+<ul type=disc>
+<li>Yes: The principal investigator is an employee of the sponsor</li>
+<li>No: The principal investigator is not an employee of the sponsor</li>
+</ul>
+
+If "No" the following information is required:
+
+      <br>
+      <br>
+
+      <div class=indent0>
+        <a name="Result_CertainAgreement_disclosureRestrictiveAgreement"></a>
+        <STRONG><a name="PIAgreement">Results Disclosure Restriction on PI(s)?</a></STRONG>
+        <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+        <br>
+Definition: Indicate whether there exists any agreement (other than an agreement solely to comply with applicable provisions of law protecting the privacy of participants participating in the clinical study) between the sponsor or its agent and the principal investigator (PI) that restricts in any manner the ability of the PI to discuss the results of the clinical study at a scientific meeting or any other public or private forum or to publish in a scientific or academic journal the results of the clinical study, after the 
+<a href="https://prsinfo.clinicaltrials.gov/definitions.html#PrimaryCompletionDate" target="def_win">Primary Completion Date</a>. Select Yes/No. 
+        <br>
+        <br>
+If there are agreements with multiple PIs who are not employees of the sponsor and there is a disclosure restriction on at least one PI, select "Yes." 
+        <br>
+        <br>
+
+        <a name="Result_CertainAgreement_disclosureRestrictionType"></a>
+        <STRONG><a name="RestrictionType">PI Disclosure Restriction Type</a></STRONG>
+        <br>
+Definition: Additional information about the results disclosure restriction. If there are varying agreements, choose the type below that represents the most restrictive of the agreements (for example, the agreement with the greatest embargo time period). Select one.
+        <br>
+
+    <ul type=disc>
+          <li>The only disclosure restriction on the PI is that the sponsor can review results communications prior to public release and can embargo communications regarding study results for a period that is <STRONG><em>less than or equal to 60 days</em></STRONG> from the date that the communication is submitted to the sponsor for review. The sponsor cannot require changes to the communication and cannot unilaterally extend the embargo.
+          </li>
+          <li>The only disclosure restriction on the PI is that the sponsor can review results communications prior to public release and can embargo communications regarding study results for a period that is <STRONG><em>more than 60 days but less than or equal to 180 days</em></STRONG> from the date that the communication is submitted to the sponsor for review. The sponsor cannot require changes to the communication and cannot unilaterally extend the embargo. 
+          </li>
+          <li>Other disclosure agreement that restricts the right of the PI to disclose, discuss, or publish study results after the study is completed
+          </li>
+        </ul>
+        <div class=indented>
+          <a name="Result_CertainAgreement_otherRestrictionDetails"></a>
+          <STRONG><a name="OtherRestrictionType">Other Disclosure Restriction Description</a></STRONG>
+          <br>
+Definition: If "Other disclosure agreement..." is selected, describe the type of agreement including any provisions allowing the sponsor to require changes, ban the communication, or extend an embargo.
+          <br>
+          Limit: 500 characters.
+          <br>
+          <br>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <!-- DE 7 -->
+    <a name="PointOfContact"></a><a name="Result_PointOfContact"></a>
+    <P></P>
+    <div class="sectionLabel" id="Result_PointOfContactLabel">
+    <img id="Result_PointOfContactImg" src="images/collapse.png" class="toggleImage" alt=""/> <STRONG>7. Results Point of Contact</STRONG>
+    </div>
+    <div id="Result_PointOfContactBody" class="sectionBody">
+    <br>
+Point of contact for scientific information about the clinical study results information.
+    <br>
+    <br>
+    <div class=indented>
+      <a name="Result_PointOfContact_nameOrTitle"></a>
+      <STRONG><a name="NameOfficialTitle">Name or Official Title</a></STRONG>
+      <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+      <br>
+Definition: The person who is designated the point of contact. This may be a specific person's name (for example, Dr. Jane Smith) or a position title (for example, Director of Clinical Trials).
+      <br>
+      <br>
+
+      <a name="Result_PointOfContact_orgName"></a>
+      <STRONG><a name="OrgName">Organization Name</a></STRONG>
+      <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+      <br>
+Definition: Full name of the designated individual's organizational affiliation.
+      <br>
+      <br>
+
+      <a name="Result_PointOfContact_phoneNumber"></a>
+      <STRONG><a name="Phone">Phone</a></STRONG>:
+        <span style="color:#CC0000; font-weight:bold; font-size:x-large">*</span><span style="color:#000099; font-weight:bold;">&#167;</span>
+Office phone number of the designated individual. Use the format 123-456-7890 within the United States and Canada. If outside the United States and Canada, provide the full phone number, including the country code.
+      <br>
+      <br>
+
+      <a name="Result_PointOfContact_phoneExt"></a>
+      <STRONG><a name="PhoneExt">Extension (Ext.)</a></STRONG>:
+      Phone extension, if needed
+      <br>
+      <br>
+
+      <a name="Result_PointOfContact_email"></a>
+      <STRONG><a name="Email">Email</a></STRONG>:
+      <span style="color:#CC0000; font-weight:bold; font-size:x-large">*</span><span style="color:#000099; font-weight:bold;">&#167;</span>
+      Electronic mail address of the designated individual.
+      <br>
+      <br>
+    </div>
+    </div>
+    
+<!--     <hr/> -->
+    <!-- DE 8 -->
+    <a name="DelayedResults"></a>
+    <br>
+    <div class="sectionLabel" id="DelayedResultsLabel">
+    <img id="DelayedResultsImg" src="images/collapse.png" class="toggleImage" alt=""/> <STRONG>8. Delayed Results</STRONG> 
+(<em>Optional</em>)</div>
+    <div id="DelayedResultsBody" class="sectionBody">
+    <br>
+A responsible party may delay the deadline for submitting results information if one of the two certification conditions below applies to the clinical study. Alternatively, the responsible party may request an extension of the results submission deadline for good cause. The extension must be granted by the NIH Director. 
+
+    <div class=indented>
+      <p>
+        <a name="DelayedResults_delayType"></a>
+        <a name="DelayResultsType"></a>
+        <STRONG>Delay Results Type</STRONG>
+        <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+        : Select one 
+        <ul type=disc>
+          <li>
+Certify Initial Approval: Trial studies an FDA-regulated drug product (including a biological product) or device product that was not approved, licensed or cleared by FDA for any use before the Primary Completion Date of the trial, and the sponsor intends to continue with product development and is either seeking, or may at a future date seek, FDA approval, licensure, or clearance of the drug product (including a biological product) or device product under study.
+          </li>
+          <li>
+Certify New Use: Trial studies an FDA-regulated drug product (including a biological product) or device product that previously has been approved, licensed, or cleared, for which the manufacturer is the sponsor of the trial and for which an application or premarket notification seeking approval, licensure, or clearance of the use being studied (which is not included in the labeling of the approved, licensed, or cleared drug, product (including a biologic product) or device product) has been filed or will be filed within one year with FDA.
+          </li>
+          <li>
+Extension: Request, for good cause, an extension of the deadline for submitting results information 
+          </li>
+        </ul>
+
+      <p>
+        <u>Note</u>: 
+If a responsible party who is both the manufacturer of the drug product (including a biological product) or device product studied in an applicable clinical trial and the sponsor of the applicable clinical trial submits a certification under "Certify New Use," that responsible party must submit such a certification for each applicable clinical trial that meets the following criteria: (1) the applicable clinical trial is required to be submitted in an application or premarket notification  seeking approval, licensure, or clearance of a new use; (2) the applicable clinical trial studies the same drug product (including a biological product) or device product for the same use as studied in the applicable clinical trial for which the initial certification was submitted. [42 U.S.C. 282 (j)(3)(E)(v)(II) and 42 CFR 11.44(b)(3)]
+      </p>
+
+      <p>
+        <a name="DelayedResults_interventionName"></a>
+        <a name="InterventionName"></a>
+        <STRONG>Intervention Name(s)</STRONG>
+        <br>
+Definition: Provide the name of one or more drugs, biological products or devices to which the certification applies. For drugs use generic name; for other types of interventions provide a brief descriptive name. The name(s) entered should match Intervention Name(s) provided in the protocol section.
+        <br>
+      </p>
+
+      <p>
+        <a name="DelayedResults_FDAApplicationNumber"></a>
+        <a name="ApprovalNumber"></a>
+        <STRONG>FDA Application Number(s)</STRONG>
+        <br>
+Definition: Provide at least one FDA application number (for example, NDA, BLA, or PMA number), if available, when Delay Results Type is "Certify Initial Approval" or "Certify New Use."
+        <br>
+      </p>
+
+      <p>
+        <a name="DelayedResults_requestedSubmissionDate"></a>
+        <a name="AnticipatedPostingDate"></a>
+        <STRONG>Requested Submission Date</STRONG>
+        <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+        (<em>Required when Delay Results Type is &quot;Extension.&quot;</em>)
+        <br>
+Definition: Estimate of the date on which the clinical study results information will be submitted, if the Delay Results Type is "Extension".
+
+        <br>
+      </p>
+
+      <p>
+        <a name="DelayedResults_explanation"></a>
+        <a name="Explanation"></a>
+        <STRONG>Explanation</STRONG>
+        <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+        (<em>Required when Delay Results Type is &quot;Extension.&quot;</em>)
+        <br>
+Definition: Description of the reason(s) why clinical study results information cannot be provided according to the deadline, with sufficient detail to justify good cause for the extension and to allow for the evaluation of the request. Note that "pending publication" and delays in data analysis for unspecified causes are not considered good cause for an extension.
+        <br>
+        Limit: 999 characters.
+        <br>
+      </p>
+    </div>
+    </div>
+
+
+<!-- Appendixes -->
+<hr>
+<br><br>
+<div class="sectionLabel" id="DocumentUploadLabel">
+  <img id="DocumentUploadImg" class="toggleImage" src="images/collapse.png" alt=""/>
+  <A name="DocumentUpload" id="DocumentUpload">
+  <STRONG>A.1 Document Upload Information</A></STRONG>
+  <span style="color:#CC0000; font-weight:bold; font-size:x-large">*</span><span style="color:#000099; font-weight:bold;">&#167;</span>
+</div>
+<div class="sectionBody" id="DocumentUploadBody">
+  <UL style="list-style-type:none;">
+    <li>
+      The full study protocol and statistical analysis plan must be uploaded as part of results information submission,
+      for studies with a Primary Completion Date on or after January 18, 2017.  
+      The protocol and statistical analysis plan may be optionally uploaded before results information submission and 
+      updated with new versions, as needed. Informed consent forms may optionally be uploaded at any time.
+      <br><br>
+    </li>
+    <li>
+Each document must include a cover page with the Official Title of the study, NCT number (if available), and date of the document.
+      <br><br>
+    </li>
+    <li>
+Uploaded study documents should be the most recent version reviewed by a human subjects protection review board (if applicable).
+      <br><br>
+    </li>
+    <li>
+      Documents must be uploaded in Portable Document Format Archival (PDF/A) format. It is strongly encouraged that 
+      the PDF/A file also be consistent with the PDF Universal Accessibility (PDF/UA) format, to optimize accessibility.
+      <br><br>
+    </li>
+    <li>
+      For each uploaded document, provide the following information.
+      <br><br>
+    </li>
+    <LI>
+      <strong>Document Type</strong>
+      <span style="color:#CC0000; font-weight:bold; font-size:x-large">*</span>
+      <br>
+      Definition: Type of uploaded study document. Select one.
+      <br><br>
+      <ul type=disc>
+	<li>Study Protocol: The written description of the clinical study, including objective(s), design, and methods. 
+	  It may also include relevant scientific background and statistical considerations
+	  (if the protocol document includes the statistical analysis plan, use "Study Protocol with SAP and/or ICF" option). 
+	  Note: All amendments approved by a human subjects protection review board (if applicable), before the time of 
+	  submission and that apply to all clinical trial Facility Locations must be included.<br><br></li>
+	<li>Statistical Analysis Plan (SAP): 
+	  The written description of the statistical considerations for analyzing the data collected in the study. 
+	  Includes how data are analyzed, what specific statistical methods are used for each analysis, and how 
+	  adjustments are made for testing multiple variables. If some analysis methods require critical assumptions, 
+	  the written description should allow data users to understand how those assumptions were verified.<br><br></li>
+	<li>Informed Consent Form (ICF): 
+	  The final version of the legal document approved by a human subjects protection review board. It is written in
+	   lay language and describes, among other things, the study’s purpose, procedures, risks and potential benefits.<br><br></li>
+	<li>Study Protocol with SAP and/or ICF:  The study protocol that also includes a statistical analysis plan (SAP) 
+	  and/or an informed consent form (ICF). Select one or both.
+          <UL type="circle">
+            <LI>Statistical Analysis Plan (SAP)</LI>
+            <LI>Informed Consent Form (ICF)</LI>
+	  </UL>
+	</li>
+      </ul>
+      <br>
+    </LI>
+    <LI>
+      <strong>Document Date</strong>
+      <span style="color:#CC0000; font-weight:bold; font-size:x-large">*</span>
+      <br>
+      Definition: The date on which the uploaded document was most recently updated and, if needed, approved by a 
+      human subjects protection review board.
+      <br><br>
+    </LI>
+    <LI>
+       <strong>Subtitle</strong>
+     <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+      <br>
+      Definition: If there is more than one document for a study of the same Document Type, provide 
+      additional descriptive information to differentiate between documents. For example, there may be more 
+      than one document of the same Document Types if there are two populations studied in the same 
+      study (such as, infants and mothers).  Do NOT use Subtitles for uploading a new version of the same document.
+      <br><br>
+    </LI>
+    <LI>
+      <strong>Document</strong>
+      <span style="color:#CC0000; font-weight:bold; font-size:x-large">*</span>
+      <br>
+      Definition: The study protocol, statistical analysis plan, and/or informed consent form document(s) uploaded 
+      in Portable Document Format Archival (PDF/A) format. It is strongly encouraged that the PDF/A file also be 
+      consistent with the PDF Universal Accessibility (PDF/UA) format, to optimize accessibility. Each document 
+      must include a cover page with the Official Title of the study, NCT number (if available), and date of the document.
+      <br><br>
+      Note:  The study document may include redaction of names, addresses, and other personally identifiable information, 
+      as well as any trade secret and/or confidential commercial information (as those terms are defined in the Freedom of 
+      Information Act (5 U.S.C. 552) and the Trade Secrets Act (18 U.S.C. 1905)) contained in the protocol or statistical 
+      analysis plan. Information that is otherwise required to be submitted as part of clinical trial registration or 
+      results information may not be redacted.
+    </LI>
+  </UL>
+</div>
+
+
+
+
+<!-- DE Last -->
+<a name="HistoryOfChanges"></a>
+<P></P>
+<div class="sectionLabel" id="HistoryOfChangesLabel">
+<img id="HistoryOfChangesImg" class="toggleImage" src="images/collapse.png" alt=""/>
+<STRONG>History of Changes</STRONG>
+</div>
+<div id="HistoryOfChangesBody" class="sectionBody">
+  <UL style="list-style-type:none;">
+    <LI>
+      January 18, 2017:&nbsp;&nbsp;Document updated with data element changes per the FDAAA 801 final rule (42 CFR Part 11).
+    </LI>
+    <LI>
+      April 18, 2017:&nbsp;&nbsp;Modified Outcome Measure Description definition to describe when the Description is required.
+    </LI>
+    <LI>
+      June 29, 2017:&nbsp;&nbsp;Added Document Upload Information data elements as Appendix 1 (A.1.). 
+    </LI>
+    <LI>
+      March 22, 2018: Clarified that Document Upload Information (Study Protocol, Statistical Analysis Plan, Informed Consent Form) should be the version reviewed by a human subjects protection review board (if applicable) and must include a cover page.
+    </LI>
+    <LI>
+      June 27, 2018:&nbsp;&nbsp;Minor editorial changes.
+    </LI>
+  </UL>
+</div>
+<!--
+</div>
+-->
+<br>
+
+
+   <div class="noprint" align="center" 
+     style="position:fixed; bottom:0; width:110%; background:#eeeeee; border:solid 1px #aaaaaa; padding:0; margin:0 0px 0 -40px;" >
+     <input type="button" style="background:#DDDDDD; font-size:small; border-width:2px; margin:3px;" 
+    value="Close" onClick="self.close();">
+   </div>
+   <div style="padding:1em;"></div>
+ </body>
+</html>
+

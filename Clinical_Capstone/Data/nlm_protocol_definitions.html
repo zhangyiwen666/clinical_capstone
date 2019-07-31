@@ -1,0 +1,1965 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML lang="en">
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8"/>
+   <META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css"/>
+   <META HTTP-EQUIV="Content-Script-Type" CONTENT="text/javascript"/>
+   <META HTTP-EQUIV="Pragma" CONTENT="no-cache"/>
+   <TITLE>ClinicalTrials.gov Protocol Registration Data Element Definitions for Interventional and Observational Studies</TITLE>
+
+   <script type="text/javascript" src="jquery/js/jquery.min.js"></script>
+ 
+   <script type="text/javascript">
+   $(document).ready(function(){
+      if (location.hash != "") {
+         var hashTag = location.hash.substring(1); /* don't want leading # */
+         var hashAnchor = "a[name=" + hashTag + "]";
+
+         $( ".sectionBody" ).hide();
+         $( ".toggleImage" ).attr('src', 'images/expand.png');
+
+         $( location.hash + "Body" ).show();
+         $( location.hash + "Img"  ).attr("src" , "images/collapse.png");
+            /* Find the section containing the anchor scrolled to and display the section's body */
+         var parentSection = $( "div.sectionBody" ).has( hashAnchor );
+         if (parentSection.length == 1) {
+            parentSection.show();
+            var sectionImg = parentSection.attr("id").replace("Body", "Img");
+            $( "#" + sectionImg ).attr("src" , "images/collapse.png");
+         } 
+
+            /* Make sure we are scrolled properly to the anchor */
+         window.scrollTo(0, $( hashAnchor ).offset().top);
+      }
+      
+      /* Handle section Label events */
+      $( ".sectionLabel" ).click(
+         function(event){
+             var myName = event.delegateTarget.getAttribute("id");
+             var myBody = $('#' + myName.replace("Label", "Body"));
+               myBody.toggle();
+             var myImg = $('#' + myName.replace("Label", "Img"));
+               myImg.attr('src', (myBody.css("display") == "none") ? "images/expand.png" : "images/collapse.png");
+      });
+    });
+    </script>
+
+    <style type="text/css">
+    <!--
+    .indented {
+       padding-left: 30pt;
+       }
+    .padding {
+       padding-left: 20pt;
+       padding-right: 20pt;
+       }
+    .indent0 {
+       padding-left: 0pt;
+       }
+    .sectionLabel:hover {
+       background: #F9F0CC;
+       border-color: black;
+       cursor: pointer;
+       }
+    @media print { 
+    .noprint { display:none; }
+    }
+    LI {
+	margin-bottom: 0.5ex; 
+     }
+    -->
+    </style>
+</HEAD>
+
+<BODY class="padding" style="color:#000000;" BGCOLOR="#FFFFFF" LINK="#0000FF" VLINK="#800080">
+
+<div align="center">
+  <H2>ClinicalTrials.gov Protocol Registration Data Element Definitions <br> for Interventional and Observational Studies</H2>
+  <p style="font-size:7pt">June 27, 2018</p>
+</div>
+<p>
+This document describes the definitions for protocol registration data elements submitted to ClinicalTrials.gov for interventional studies (clinical trials) and observational studies. These definitions are mostly adapted from <a href="https://www.federalregister.gov/documents/2016/09/21/2016-22129/clinical-trials-registration-and-results-information-submission" target="_blank">
+42 CFR Part 11</a>.
+<p>
+Data element entries are annotated with symbols to indicate generally what information is required to be submitted (and under which circumstances). The responsible party must ensure that the information provided complies with any applicable laws, regulations, or policies. For more information about various requirements and definitions of regulatory terms under 42 CFR Part 11, see <a href="https://clinicaltrials.gov/ct2/manage-recs/resources">Support Materials</a>.
+<p>
+<u>Note</u>: The term "clinical study" is used to refer to both interventional and observational studies. The term "participant" is used to refer to human subjects.
+
+<br>
+
+<hr/>
+
+    <table border=0 align=center>
+      <tr>
+        <td align=center valign=top style="color:#CC0000; font-weight:bold;  font-size:x-large">*</td>
+        <td>&nbsp;&nbsp;Required</td>
+      </tr>
+      <tr>
+        <td align=center valign=top><span style="color:#CC0000; font-weight:bold; font-size:x-large">*</span><span style="color:#000099; font-weight:bold;">&#167;</span></td>
+        <td>&nbsp;&nbsp;Required if Study Start Date is on or after January 18, 2017</td>
+      </tr>
+      <tr>
+        <td align=center valign=top style="color:#0000FF; font-weight:bold;  font-size:large">[*]</td>
+        <td>&nbsp;&nbsp;Conditionally required</td>
+      </tr>
+    </table>
+    <hr/>
+
+
+<!-- DE 1 -->
+<a name="identification" id="identification"></a>
+<br><br>
+<div class="sectionLabel" id="identificationLabel">
+<img id="identificationImg" class="toggleImage" src="images/collapse.png" alt=""/>
+<STRONG>1. Study Identification</STRONG>
+</div> 
+<div id="identificationBody" class="sectionBody">
+  <UL style="list-style-type:none;">
+    <LI>
+      <STRONG><A name="PrimaryId" id="PrimaryId">Unique Protocol Identification Number</A></STRONG>
+      <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+      <br>
+      Definition: Any unique identifier assigned to the protocol by the sponsor. 
+      <br>
+      Limit: 30 characters.
+      <br>
+
+      <P><STRONG><A name="BriefTitle" id="BriefTitle">Brief Title</A></STRONG>
+      <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+      <br>
+      Definition: A short title of the clinical study written in language intended for the lay public.
+      The title should include, where possible, information on the participants, condition being evaluated, and intervention(s) studied.
+      <br>
+      Limit: 300 characters.
+      <br>
+
+      <div class=indented>
+        <P><STRONG><A name="Acronym" id="Acronym">Acronym</A></STRONG>
+        <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+        <br>
+        Definition: An acronym or abbreviation used publicly to identify the clinical study, if any.
+        <br>
+        Limit: 14 characters.
+        <br>
+      </div>
+
+      <P><STRONG><A name="OfficialTitle" id="OfficialTitle">Official Title</A></STRONG>
+      <span style="color:#CC0000; font-weight:bold; font-size:x-large">*</span><span style="color:#000099; font-weight:bold;">&#167;</span>
+      <br>
+      Definition: The title of the clinical study, corresponding to the title of the protocol.
+      <br>
+      Limit: 600 characters.
+      <br>
+
+      <P><STRONG><A name="SecondaryIds" id="SecondaryIds">Secondary IDs </A></STRONG>
+      <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+      <br>
+      Definition: An identifier(s) (ID), if any, other than the organization's Unique Protocol Identification Number or the NCT number that is assigned to the clinical study. This includes any unique clinical study identifiers assigned by other publicly available clinical trial registries. If the clinical study is funded in whole or in part by a U.S. Federal Government agency, the complete grant or contract number must be submitted as a Secondary ID.
+      <br>
+      Limit: 30 characters.
+      <p>
+      If there is a Secondary ID, then the following information must be provided:
+      </p>
+
+      <div class=indented>
+        <STRONG>Secondary ID Type</STRONG>
+        <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+        <br>
+        Definition: A description of the type of Secondary ID. Select one.
+        <br>
+        <br>
+        <UL type=disc>
+          <LI>
+            U.S. National Institutes of Health (NIH) Grant/Contract Award Number: In the Secondary ID field, include activity code, institute code, and 6-digit serial number. Other components of the full award number (type code, support year, and suffix) are optional.
+          </LI>
+          <LI>
+            Other Grant/Funding Number: Identifier assigned by a funding organization other than the U.S. NIH; also required to enter the name of the funding organization.
+          </LI>
+          <LI>
+            Registry Identifier: Number assigned by a clinical trial registry (for example, a registry that is part of the World Health Organization [WHO] Registry Network); also required to enter the name of the clinical trial registry.
+          </LI>
+          <LI>
+            EudraCT Number: Identifier assigned by the European Medicines Agency Clinical Trials Database (EudraCT). 
+          </LI>
+          <LI>
+            Other Identifier: Also required to enter a brief description of the identifier (for example, the name of organization that issued the identifier). 
+          </LI>
+        </UL>
+
+        <div class=indented>
+        <P><STRONG><A name="SecondaryIdDescription" id="SecondaryIdDescription">Description</A></STRONG>
+        <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+        <br>
+        Definition: If a Secondary ID Type of "Other Grant/Funding Number," "Registry Identifier," or "Other Identifier" is selected, provide the name of the funding organization, clinical trial registry, or organization that issued the identifier.
+        <br>
+        Limit: 119 characters.
+        <br>
+        </div>
+      </div>
+
+      <P><STRONG><A name="StudyType" id="StudyType">Study Type</A></STRONG>
+      <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+      <br>
+      Definition: The nature of the investigation or investigational use for which clinical study information is being submitted. Select one.
+      <br>
+      <UL type=disc>
+        <LI>
+          <A name="Interventional" id="Interventional">Interventional (clinical trial)</A>: 
+          Participants are assigned prospectively to an intervention or interventions according to a protocol to evaluate the effect of the intervention(s) on biomedical or other health related outcomes. 
+          <br>
+          <br>
+        </LI>
+        <LI>
+          <A name="Observational" id="Observational">Observational</A>: 
+          Studies in human beings in which biomedical and/or health outcomes are assessed in pre-defined groups of individuals. Participants in the study may receive diagnostic, therapeutic, or other interventions, but the investigator does not assign specific interventions to the study participants. This includes when participants receive interventions as part of routine medical care, and a researcher studies the effect of the intervention.
+          <br><br>
+          <A name="PatientRegistry" id="PatientRegistry"></A>
+          <UL>
+            <LI>
+              Patient Registry: An observational study that is also considered to be a Patient Registry. This type of study should only be registered once in the Protocol Registration and Results System (PRS), by the sponsor responsible for the primary data collection and analysis.
+              <br><br>
+              <u>Note</u>: The <a href="https://www.effectivehealthcare.ahrq.gov/search-for-guides-reviews-and-reports/?pageaction=displayproduct&amp;productid=690" target="_blank"> Agency for Healthcare Research and Quality (AHRQ) defines a Patient Registry</a> as including an organized system that uses observational methods to collect uniform data (clinical and other) prospectively for a population defined by a particular disorder/disease, condition (including susceptibility to a disorder), or exposure (including products, healthcare services, and/or procedures) and that serves a predetermined scientific, clinical, or policy purpose. Patient registries may be single purpose or on-going data collection programs that address one or more questions.
+            </LI>
+          </UL>
+          <br>
+        </LI>
+        <LI>
+          <A name="ExpandedAccess" id="ExpandedAccess">Expanded Access</A>: 
+          An investigational drug product (including biological product) available through expanded access for patients who do not qualify for enrollment in a clinical trial. Expanded Access includes all expanded access types under section 561 of the Federal Food, Drug, and Cosmetic Act: (1) for individual patients, including emergency use; (2) for intermediate-size patient populations; and (3) under a treatment IND or treatment protocol. (For more information on data requirements for this Study Type, see <a href="expanded_access_definitions.html">Expanded Access Data Element Definitions</a>).
+        </LI>
+      </UL>
+    </LI>
+  </UL>
+</div>
+
+<!-- DE 2 -->
+<a name="status" id="status"></a>
+<br><br>
+<div class="sectionLabel" id="statusLabel">
+<img id="statusImg" class="toggleImage" src="images/collapse.png" alt=""/>
+<STRONG>2. Study Status</STRONG>
+</div>
+<div id="statusBody" class="sectionBody">
+  <UL style="list-style-type:none;">
+    <LI>
+      <P><STRONG><A name="VerificationDate" id="VerificationDate">Record Verification Date</A></STRONG>
+      <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+      <br>
+      Definition: The date on which the responsible party last verified the clinical study information in the entire ClinicalTrials.gov record for the clinical study, even if no additional or updated information is being submitted.
+      <br>
+
+      <P><STRONG><A name="OverallStatus" id="OverallStatus">Overall Recruitment Status</A></STRONG>
+      <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+      <br>
+      Definition: The recruitment status for the clinical study as a whole, based upon the status of the individual sites. If at least one facility in a multi-site clinical study has an Individual Site Status of "Recruiting," then the Overall Recruitment Status for the study must be "Recruiting." Select one. 
+
+      <UL type=disc>
+        <LI>Not yet recruiting: Participants are not yet being recruited</LI>
+        <LI>Recruiting: Participants are currently being recruited, whether or not any participants have yet been enrolled</LI>
+        <LI>Enrolling by invitation: Participants are being (or will be) selected from a predetermined population</LI>
+        <LI>Active, not recruiting: Study is continuing, meaning participants are receiving an intervention or being examined, but new participants are not currently being recruited or enrolled</LI>
+        <LI>Completed: The study has concluded normally; participants are no longer receiving an intervention or being examined (that is, last participant’s last visit has occurred)</LI>
+        <LI>Suspended: Study halted prematurely but potentially will resume</LI>
+        <LI>Terminated: Study halted prematurely and will not resume; participants are no longer being examined or receiving intervention</LI>
+        <LI>Withdrawn: Study halted prematurely, prior to enrollment of first participant</LI>
+      </UL>
+      <p>
+
+      <div class=indented>
+        <p><STRONG>Why Study Stopped</STRONG>
+        <span style="color:#CC0000; font-weight:bold; font-size:x-large">*</span><span style="color:#000099; font-weight:bold;">&#167;</span>
+        <br>
+        Limit: 160 characters.
+        <br>
+        Definition: A brief explanation of the reason(s) why such clinical study was stopped (for a clinical study that is "Suspended," "Terminated," or "Withdrawn" prior to its planned completion as anticipated by the protocol).
+        <br>
+      </div>
+
+      <P><STRONG><A name="StartDate" id="StartDate">Study Start Date</A></STRONG>
+      <span style="color:#CC0000; font-weight:bold; font-size:x-large">*</span><span style="color:#000099; font-weight:bold;">&#167;</span>
+      <br>
+      Definition: The estimated date on which the clinical study will be open for recruitment of participants, or the actual date on which the first participant was enrolled.
+      <P>
+      <u>Note</u>: "Enrolled" means a participant's, or their legally authorized representative’s, agreement to participate in a clinical study following completion of the informed consent process. Potential participants who are screened for the purpose of determining eligibility for the study, but do not participate in the study, are not considered enrolled, unless otherwise specified by the protocol.
+      <br>
+
+      <P><STRONG><A name="PrimaryCompletionDate" id="PrimaryCompletionDate">Primary Completion Date</A></STRONG>
+      <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+      <br>
+      Definition: The date that the final participant was examined or received an intervention for the purposes of final collection of data for the primary outcome, whether the clinical study concluded according to the pre-specified protocol or was terminated. In the case of clinical studies with more than one primary outcome measure with different completion dates, this term refers to the date on which data collection is completed for all of the primary outcomes.
+      <p>
+      Once the clinical study has reached the primary completion date, the responsible party must update the Primary Completion Date to reflect the actual primary completion date.
+      <br>
+
+      <P><STRONG><A name="LastFollowUpDate" id="LastFollowUpDate">Study Completion Date</A></STRONG>
+      <span style="color:#CC0000; font-weight:bold; font-size:x-large">*</span><span style="color:#000099; font-weight:bold;">&#167;</span>
+      <br>
+      Definition: The date the final participant was examined or received an intervention for purposes of final collection of data for the primary and secondary outcome measures and adverse events (for example, last participant’s last visit), whether the clinical study concluded according to the pre-specified protocol or was terminated.
+      <p>
+      Once the clinical study has reached the study completion date, the responsible party must update the Study Completion Date to reflect the actual study completion date.
+      <br>
+      <br>
+    </LI>
+  </UL>
+</div>
+
+<!-- DE 3 -->
+<a name="Sponsors" id="sponsors"></a>
+<br><br>
+<div class="sectionLabel" id="SponsorsLabel">
+<img id="SponsorsImg" class="toggleImage" src="images/collapse.png" alt=""/>
+<STRONG>3. Sponsor/Collaborators</STRONG>
+</div>
+<div id="SponsorsBody" class="sectionBody">
+
+  <div class=indented>
+    <P><STRONG><A name="RespParty" id="RespParty">Responsible Party, by Official Title</A></STRONG>
+    <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+    <br>
+    Definition: An indication of whether the responsible party is the sponsor, the sponsor-investigator, or a principal investigator designated by the sponsor to be the responsible party. Select one.
+    <UL type=disc>
+        <LI>Sponsor: The entity (for example, corporation or agency) that initiates the study</LI>
+        <LI>Principal Investigator: The individual designated as responsible party by the sponsor (see Note)</LI>
+        <LI>Sponsor-Investigator: The individual who both initiates and conducts the study</LI>
+    </UL>
+    <br>
+    <u>Note</u>: The sponsor may designate a principal investigator as the responsible party if such principal investigator meets all of the following requirements: is responsible for conducting the study; has access to and control over the data from the study; has the right to publish the results of the study; and has the ability to meet all of the requirements for submitting and updating clinical study information.
+
+    <div class=indented>
+      <P><STRONG>Investigator Information</STRONG>
+      <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+      <br>
+      If the Responsible Party, by Official Title is either "Principal Investigator" or "Sponsor-Investigator," the following is required:
+      <UL style="list-style-type:none;">
+        <LI><STRONG>Investigator Name</STRONG>: 
+          Name of the investigator, including first and last name
+          <p>
+        </LI>
+        <LI><STRONG>Investigator Official Title</STRONG>: 
+          The official title of the investigator at the primary organizational affiliation
+          <br>
+          Limit: 254 characters.
+          <p>
+        </LI>
+        <LI><STRONG>Investigator Affiliation</STRONG>: 
+          Primary organizational affiliation of the individual;
+          <br>
+          Limit: 160 characters.
+        </LI>
+      </UL>
+    </div>
+
+    <P><STRONG><A name="Sponsor" id="Sponsor">Name of the Sponsor</A></STRONG>
+    <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+    <br>
+    Definition: The name of the entity or the individual who is the sponsor of the clinical study.
+    <br>
+    Limit: 160 characters.
+    <P>
+    <u>Note</u>: When a clinical study is conducted under an investigational new drug application (IND) or investigational device exemption (IDE), the IND or IDE holder is considered the sponsor. When a clinical study is not conducted under an IND or IDE, the single person or entity who initiates the study, by preparing and/or planning the study, and who has authority and control over the study, is considered the sponsor.
+    <br>
+
+    <P><STRONG><A name="Collaborators" id="Collaborators">Collaborators</A></STRONG>
+    <br>
+    Definition: Other organizations (if any) providing support.  Support may include funding, design, 
+    implementation, data analysis or reporting. 
+    The responsible party is responsible for confirming all collaborators before listing them.
+    <br>
+    Limit: 160 characters.
+    <br>
+  </div>
+</div>
+
+<!-- DE 4 -->
+<a name="oversight" id="oversight"></a>
+<br><br>
+<div class="sectionLabel" id="oversightLabel">
+<img id="oversightImg" class="toggleImage" src="images/collapse.png" alt=""/>
+<STRONG>4. Oversight</STRONG>
+</div>
+<div id="oversightBody" class="sectionBody">
+
+  <UL style="list-style-type:none;">
+    <LI>
+
+    <P>
+    <STRONG><A name="FDADrugProduct" id="FDADrugProduct">Studies a U.S. FDA-regulated Drug Product</A></STRONG>
+    <span style="color:#CC0000; font-weight:bold; font-size:x-large">*</span><span style="color:#000099; font-weight:bold;">&#167;</span>
+    (<em>Optional for Observational Studies</em>)
+    <br>
+    Definition: Indication that a clinical study is studying a drug product (including a biological product) subject to section 505 of the Federal Food, Drug, and Cosmetic Act or to section 351 of the Public Health Service Act. Select Yes/No.
+    <br>
+
+      <P>
+      <STRONG><A name="FDAReg" id="FDAReg">Studies a U.S. FDA-regulated Device Product</A></STRONG>
+      <span style="color:#CC0000; font-weight:bold; font-size:x-large">*</span><span style="color:#000099; font-weight:bold;">&#167;</span> 
+      (<em>Optional for Observational Studies</em>)
+      <br>
+      Definition: Indication that a clinical study is studying a device product subject to section 510(k), 515, or 520(m) of the Federal Food, Drug, and Cosmetic Act. Select Yes/No.
+      <br>
+      <UL style="list-style-type:none;">
+        <LI>
+          <STRONG><A name="deviceNotCleared" id="deviceNotCleared">Device Product Not Approved or Cleared by U.S. FDA</A></STRONG>
+        <span style="color:#CC0000; font-weight:bold; font-size:x-large">*</span><span style="color:#000099; font-weight:bold;">&#167;</span>
+        (<em>formerly "Delayed Posting"</em>)
+        <br>
+        Definition: Indication that at least one device product studied in the clinical study has not been previously approved or cleared by the U.S. Food and Drug Administration (FDA) for one or more uses. Select one.
+        <br>
+        <br>
+        <ul type=disc>
+          <li>Yes: At least one studied FDA-regulated device product has not been previously approved or cleared by FDA</li>
+          <li>No: All studied FDA-regulated device products have been previously approved or cleared by FDA</li>
+        </ul>
+        <br>
+        <u>Note</u>: Full posting of registration information will be delayed if "Yes" is selected and the study is an applicable clinical trial that is required to be registered under 42 CFR 11.22. However, the responsible party may authorize NIH to post the information using the Post Prior to U.S. FDA Approval or Clearance data element.
+        <br>
+
+        <UL style="list-style-type:none;">
+          <LI>
+            <P>
+            <STRONG><A name="PostPriorFDAApproval" id="PostPriorFDAAApproval">Post Prior to U.S. FDA Approval or Clearance</A></STRONG>
+            <br>
+            Definition: Authorize NIH to post publicly clinical trial registration information for a clinical study of a device product that has not been previously approved or cleared (that would otherwise be subject to delayed posting). Select Yes/No.
+            <br>
+          </LI>
+        </UL>
+
+        <STRONG><A name="PediatricPostmarket" id="PediatricPostmarket">Pediatric Postmarket Surveillance of a Device Product</A></STRONG>
+        <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+        <br>
+        Definition: Indication that a clinical study that includes a U.S. FDA-regulated device product is a pediatric postmarket surveillance of a device product ordered under section 522 of the Federal Food, Drug, and Cosmetic Act. Select Yes/No.
+        <br>
+      </LI>
+    </UL>
+    <P>
+    <STRONG><A name="INDIDEInfo" id="INDIDEInfo">Investigational New Drug Application (IND)/Investigational Device Exemption (IDE) Information</A></STRONG>
+    (<em>Optional for Observational Studies</em>)
+    <br>
+    Definition: Complete the following information regarding an IND or IDE for the clinical study as defined under U.S. Food and Drug Administration (FDA) regulations in 21 CFR 312.3 or 21 CFR 812, respectively.
+    <br>
+
+    <UL style="list-style-type:none;">
+      <LI>
+        <STRONG><A name="section801" id="section801">U.S. Food and Drug Administration IND or IDE</A></STRONG>
+        <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+        <br>
+        Definition: Indicate whether the clinical study is being conducted under an IND or IDE application filed with the FDA. Select one. 
+        <br>(<em>Will not be made public - for administrative purposes only</em>)
+        <br>
+        <br>
+        <ul type=disc>
+          <li>Yes: Clinical study is conducted under an IND or IDE filed with the FDA.</li>
+          <li>No: Clinical study is not conducted under an IND or IDE filed with the FDA. Includes a clinical study that is “IND exempt” under FDA regulations in 21 CFR 312.2(b), or is for a nonsignificant risk device subject to FDA-abbreviated IDE requirements in 21 CFR 812.2(b), or is exempt from the IDE filing requirements in 21 CFR 812.</li>
+        </ul>
+        <br>
+        If there is an IND or IDE filed with the FDA for the clinical study, the following are required:
+        <br>
+      </LI>
+    </UL>
+
+    <UL style="list-style-type:none;">
+      <LI>
+        <UL style="list-style-type:none;">
+          <LI>
+            <P><STRONG><A name="IndGrantor" id="INDGrantor">FDA Center</A></STRONG>
+            <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+            <br>
+            Definition: The name or abbreviation of the FDA Center with which the IND or IDE is filed. Select one. (<em>Will not be made public - for administrative purposes only.</em>) 
+  
+            <UL style="list-style-type:disc;">
+              <LI>CDER: Center for Drug Evaluation and Research</LI>
+              <LI>CBER: Center for Biologics Evaluation and Research</LI>
+              <LI>CDRH: Center for Devices and Radiological Health</LI>
+            </UL>
+
+            <P><STRONG><A name="IndNumber" id="INDNumber">IND/IDE Number</A></STRONG>
+            <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+            <br>
+            Definition: IND or IDE number assigned by the FDA Center. (<em>Will not be made public - for administrative purposes only.</em>)
+            <br>
+  
+            <P><STRONG><A name="IndSerialNumber" id="IndSerialNumber">IND Serial Number</A></STRONG>
+            <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+            <br>
+            Definition: For an IND, the IND serial number, as defined in 21 CFR 312.23(e), if any, assigned to the clinical study. 
+            (<em>Will not be made public - for administrative purposes only.</em>)
+  
+
+            <P><STRONG><A name="HasExpandedAccess" id="HasExpandedAccess">Availability of Expanded Access</A></STRONG>
+            <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+            <br>
+            Definition: Whether there is expanded access to the investigational product for patients who do not qualify for enrollment in a clinical trial. Expanded Access for investigational drug products (including biological products) includes all expanded access types under section 561 of the Federal Food, Drug, and Cosmetic Act: (1) for individual participants, including emergency use; (2) for intermediate-size participant populations; and (3) under a treatment IND or treatment protocol. Select one.
+            <br>
+            <UL type=disc>
+              <LI>Yes: Investigational product is available through expanded access</LI>
+              <LI>No: Investigational product is not available through expanded access</LI>
+              <LI>Unknown: If the responsible party is not the sponsor of the clinical trial and manufacturer of the investigational product</LI>
+            </UL>
+
+            <UL style="list-style-type:none;">
+              <LI>
+                <P><STRONG><A name="EANCTNumber" id="EANCTNumber">Expanded Access Record NCT Number</a></STRONG>
+                <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+                <br>
+                Definition: If expanded access is available, the NCT number of the expanded access record. If there is no existing expanded access record, the responsible party who is both the manufacturer of the investigational drug product (including a biological product) and the sponsor of the ACT is required to create an expanded access record. (For more information on data requirements for this Study Type, see <a href="expanded_access_definitions.html">Expanded Access Data Element Definitions</a>).
+                <br>
+              </LI>
+            </UL>
+          </LI>
+        </UL>
+   
+          </LI>
+        </UL>
+            <P><STRONG><a name="ProductFromUS" id="ProductFromUS">Product Manufactured in and Exported from the U.S.</a></STRONG>
+            <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+            <br>
+            Definition: Whether any drug product (including a biological product) or device product studied in the clinical study is manufactured in the United States or one of its territories and exported for study in a clinical study in another country.  Required if U.S. FDA-regulated Drug and/or U.S. FDA-regulated Device is "Yes," U.S. FDA IND or IDE is "No", and Facility Information does not include at least one U.S. location. Select Yes/No.
+
+        <br>
+        <br>
+
+        <STRONG><A name="HumanSubject" id="HumanSubject">Human Subjects Review</A></STRONG>
+        <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+        <br>
+        Definition: Studies must have approval (or be exempt, as appropriate) from a Human Subjects Protection Review Board prior to the enrollment of the first participant to be eligible for registration. A study may be submitted for registration prior to approval by the review board so long as the study is not yet recruiting participants.
+        <br>
+
+        <P>
+
+        <UL style="list-style-type:none;">
+          <LI>
+            <STRONG><A name="IRBApprovalStatus" id="IRBApprovalStatus">Human Subjects Protection Review Board Status</A></STRONG>
+            <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+            <br>
+            Definition: Indicate whether a clinical study has been reviewed and approved by at least one human subjects protection review board or such review is not required per applicable law (for example, 21 CFR Part 56, 45 CFR Part 46, or other applicable regulation). Select one. 
+            <br>
+            <br>
+            <UL type=disc>
+              <LI>Request not yet submitted: Review board approval is required but has not yet been requested</LI>
+              <LI>Submitted, pending: Review board approval has been requested but not yet granted</LI>
+              <LI>Submitted, approved: Review board approval has been requested and obtained</LI>
+              <LI>Exempt: An exemption in accord with applicable law and regulation has been granted</LI>
+              <LI>Submitted, denied: Review board has denied the approval request</LI>
+              <LI>Submission not required: Review board approval is not required because the study is not subject to laws, regulations, or applicable institutional policies requiring human subjects review</LI>
+            </UL>
+            <p>
+            If the study is not an applicable clinical trial that is required to be registered under 42 CFR Part 11, is not funded in whole or in part by the U.S. Government, and is not conducted under an IND or IDE, then the following information is required:
+            <p>
+          </LI>
+          <LI>
+            <UL style="list-style-type:none;">
+            <LI><STRONG><A name="IRBApprovalNumber" id="IRBApprovalNumber">Board Approval Number</A></STRONG>
+              <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+              <br>
+              Definition: Number assigned by the human subjects review board upon approval of the protocol. May be omitted if status is anything other than approved. 
+              (<em>Will not be made public - for administrative purposes only.</em>)
+              <br>
+              <br>
+            </LI>
+
+            <LI><STRONG><A name="IRBName" id="IRBName">Board Name</A></STRONG>
+              <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+              <br>
+              Definition: Full name of the approving human subjects review board. 
+              (<em>Will not be made public - for administrative purposes only.</em>)
+              <br>
+              <br>
+            </LI>
+
+            <LI><STRONG><A name="IRBAffiliation" id="IRBAffiliation">Board Affiliation</A></STRONG>
+              <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+              <br>
+              Definition: Official name of organizational affiliation of the approving human subjects review board. 
+              (<em>Will not be made public - for administrative purposes only.</em>)
+              <br>
+              Limit: 255 characters.
+              <br>
+              <br>
+            </LI>
+
+            <LI><STRONG><A name="IRBContact" id="IRBContact">Board Contact</A></STRONG>
+              <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+              <br>
+              Definition: Contact information for the human subjects review board. 
+              (<em>Will not be made public - for administrative purposes only.</em>)
+              <br>
+              <br>
+              <UL style="list-style-type:none;">
+                <LI><A name="IRBContactPhone" id="IRBContactPhone"><STRONG>Phone</STRONG> (or Email required): </A> Phone number</LI>
+                <LI><A name="IRBContactExt" id="IRBContactExt"><STRONG>Extension</STRONG>: </A>Phone extension, if needed</LI>
+                <LI><A name="IRBContactEmail" id="IRBContactEmail"><STRONG>Email</STRONG> (or Phone required):</A> Electronic mail address.</LI>
+                <LI><A name="IRBContactAddress" id="IRBContactAddress"><STRONG>Address</STRONG>: </A>Mailing address for the board, including street address, city, State or province, postal code, and country.</LI>
+              </UL>
+              <br>
+            </LI>
+          </UL>
+          </LI>
+
+          </UL>
+          </LI>
+
+          <LI><STRONG><A name="hasDMC" id="hasDMC">Data Monitoring Committee</A></STRONG>
+            <br>
+            Definition: Indicate whether a data monitoring committee has been appointed for this study. The data monitoring committee (board) is a group of independent scientists who are appointed to monitor the safety and scientific integrity of a human research intervention, and to make recommendations to the sponsor regarding the stopping of the trial for efficacy, for harms or for futility. The composition of the committee is dependent upon the scientific skills and knowledge required for monitoring the particular study. Select Yes/No.
+            <br> 
+            <br> 
+          </LI>
+
+      <UL style="list-style-type:none;">
+        <LI><STRONG><A name="RegulatoryAuthorities" id="RegulatoryAuthorities">FDA Regulated Intervention</A></STRONG>
+          <br>
+          Definition: Indicate whether this study includes an intervention subject to U.S. Food and Drug Administration regulation under section 351 of the Public Health Service Act or any of the following sections of the Federal Food, Drug, and Cosmetic Act: 505, 510(k), 515, 520(m), and 522. Select Yes/No.
+          <p>
+          <UL style="list-style-type:none;">
+            <LI><STRONG><A name="Section801CT" id="Section801CT">Section 801 Clinical Trial</A></STRONG>
+              <br>
+              Definition: If this study includes an FDA regulated intervention, indicate whether this is an applicable clinical trial as defined in U.S. Public Law 110-85, Title VIII, Section 801. Select Yes/No.
+              <br>
+            </LI>
+          </UL>
+    </LI>
+  </UL>
+</div>
+
+<!-- DE 5 -->
+<a name="description" id="description"></a>
+<br><br>
+<div class="sectionLabel" id="descriptionLabel">
+<img id="descriptionImg" class="toggleImage" src="images/collapse.png" alt=""/> <STRONG>5. Study Description</STRONG></div>
+<div id="descriptionBody" class="sectionBody">
+
+  <UL style="list-style-type:none;">
+    <LI>
+      <STRONG><A name="BriefSummary" id="BriefSummary">Brief Summary</A></STRONG>
+      <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+      <br>
+      Definition: A short description of the clinical study, including a brief statement of the clinical study's hypothesis, written in language intended for the lay public.
+      <br>
+      Limit: 5000 characters.
+      <br>
+      <br>
+    </LI>
+    <LI><STRONG><A name="DetailedDescription" id="DetailedDescription">Detailed Description</A></STRONG>
+      <br>
+      Definition: Extended description of the protocol, including more technical information (as compared to the Brief Summary), if desired. Do not include the entire protocol; do not duplicate information recorded in other data elements, such as Eligibility Criteria or outcome measures.
+      <br>
+      Limit: 32,000 characters.
+      <br>
+      <br>
+      For Patient Registries: Also describe the applicable registry procedures and other quality factors (for example, third party certification, on-site audit). In particular, summarize any procedures implemented as part of the patient registry, including, but not limited to the following:
+
+      <br>
+      <br>
+      <UL>
+        <LI>Quality assurance plan that addresses data validation and registry procedures, including any plans for site monitoring and auditing.</LI>
+        <LI>Data checks to compare data entered into the registry against predefined rules for range or consistency with other data fields in the registry.</LI>
+        <LI>Source data verification to assess the accuracy, completeness, or representativeness of registry data by comparing the data to external data sources (for example, medical records, paper or electronic case report forms, or interactive voice response systems).</LI>
+        <LI>Data dictionary that contains detailed descriptions of each variable used by the registry, including the source of the variable, coding information if used (for example, World Health Organization Drug Dictionary, MedDRA), and normal ranges if relevant.</LI>
+        <LI>Standard Operating Procedures to address registry operations and analysis activities, such as patient recruitment, data collection, data management, data analysis, reporting for adverse events, and change management.</LI>
+        <LI>Sample size assessment to specify the number of participants or participant years necessary to demonstrate an effect.</LI>
+        <LI>Plan for missing data to address situations where variables are reported as missing, unavailable, non-reported, uninterpretable, or considered missing because of data inconsistency or out-of-range results.</LI>
+        <LI>Statistical analysis plan describing the analytical principles and statistical techniques to be employed in order to address the primary and secondary objectives, as specified in the study protocol or plan.</LI>
+      </UL>
+    </LI>
+  </UL>
+</div>
+
+<!-- DE 6 -->
+<a name="Conditions" id="Conditions"></a>
+<br><br>
+<div class="sectionLabel" id="ConditionsLabel">
+<img id="ConditionsImg" class="toggleImage" src="images/collapse.png" alt=""/> <STRONG>6. Conditions and Keywords</STRONG></div>
+<div id="ConditionsBody" class="sectionBody">
+
+  <UL style="list-style-type:none;">
+    <LI>
+      <STRONG><A name="PrimaryCondition" id="PrimaryCondition">Primary Disease or Condition Being Studied in the Trial, or the Focus of the Study</a></STRONG>
+      <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+      <br>
+      Definition: The name(s) of the disease(s) or condition(s) studied in the clinical study, or the focus of the clinical study. Use, if available, appropriate descriptors from NLM's Medical Subject Headings (MeSH)-controlled vocabulary thesaurus or terms from another vocabulary, such as the Systematized Nomenclature of Medicine—Clinical Terms (SNOMED CT), that has been mapped to MeSH within the Unified Medical Language System (UMLS) Metathesaurus.
+
+      <P><STRONG><A name="Keywords" id="Keywords">Keywords</A></STRONG>
+      <br>
+      Definition: Words or phrases that best describe the protocol. Keywords help users find studies in the database. Use NLM's Medical Subject Heading (MeSH)-controlled vocabulary terms where appropriate. Be as specific and precise as possible. Avoid acronyms and abbreviations. 
+      <br>
+    </LI>
+  </UL>
+</div>
+
+<!-- DE 7 -->
+<a name="StudyDesign" id="StudyDesign"></a>
+<br><br>
+<div class="sectionLabel" id="StudyDesignLabel">
+<img id="StudyDesignImg" class="toggleImage" src="images/collapse.png" alt=""/> <STRONG>7. Study Design</STRONG></div>
+<div id="StudyDesignBody" class="sectionBody">
+
+  <UL style="list-style-type:none;">
+  <LI>
+    <STRONG><A name="IntStudyDesign" id="IntStudyDesign">Interventional Study Design</A></STRONG>
+    <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+    (<em>For interventional studies only</em>)
+    <br>
+    Definition: A description of the manner in which the clinical trial will be conducted, including the following information:
+    <br>
+    <br>
+    <UL style="list-style-type:none;">
+    <LI><STRONG><A name="IntPurpose" id="IntPurpose">Primary Purpose</A></STRONG>
+      <span style="color:#CC0000; font-weight:bold; font-size:x-large">*</span><span style="color:#000099; font-weight:bold;">&#167;</span>
+      <br>
+      Definition: The main objective of the intervention(s) being evaluated by the clinical trial. Select one. 
+      <br>
+      <br>
+      <UL type=disc>
+      <LI>Treatment: One or more interventions are being evaluated for treating a disease, syndrome, or condition.</LI>
+      <LI>Prevention: One or more interventions are being assessed for preventing the development of a specific disease or health condition.</LI>
+      <LI>Diagnostic: One or more interventions are being evaluated for identifying a disease or health condition.</LI>
+      <LI>Supportive Care: One or more interventions are evaluated for maximizing comfort, minimizing side effects, or mitigating against a decline in the participant's health or function.</LI>
+      <LI>Screening: One or more interventions are assessed or examined for identifying a condition, or risk factors for a condition, in people who are not yet known to have the condition or risk factor.</LI>
+      <LI>Health Services Research: One or more interventions for evaluating the delivery, processes, management, organization, or financing of healthcare.</LI>
+      <LI>Basic Science: One or more interventions for examining the basic mechanism of action (for example, physiology or biomechanics of an intervention).</LI>
+      <LI>Device Feasibility: An intervention of a device product is being evaluated in a small clinical trial
+	(generally fewer than 10 participants) to determine the feasibility of the product; or a clinical trial
+	to test a prototype device for feasibility and not health outcomes. Such studies are conducted to confirm the design and 
+	operating specifications of a device before beginning a full clinical trial.</LI>
+      <LI>Other: None of the other options applies.</LI>
+      </UL>
+      <br>
+    </LI>
+
+    <LI>
+      <STRONG><A name="StudyPhase" id="StudyPhase">Study Phase</A></STRONG>
+      <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+      <br>
+      Definition: For a clinical trial of a drug product (including a biological product), the numerical phase of such clinical trial, consistent with terminology in 21 CFR 312.21 and in 21 CFR 312.85 for phase 4 studies. Select only one.
+      <br>
+      <br>
+
+      <UL type=disc>
+      <LI>N/A: Trials without phases (for example, studies of devices or behavioral interventions). 
+      </LI>
+      <LI>Early Phase 1 (Formerly listed as "Phase 0"): Exploratory trials, involving very limited human exposure, 
+	with no therapeutic or diagnostic intent (e.g., screening studies, microdose studies). 	See 
+	<a href="https://www.fda.gov/downloads/drugs/guidancecomplianceregulatoryinformation/guidances/ucm078933.pdf"
+	   >FDA guidance on exploratory IND studies</a>
+	for more information.
+      </LI>
+      <LI>Phase 1: Includes initial studies to determine the metabolism and pharmacologic actions of drugs in humans, the side effects associated with increasing doses, and to gain early evidence of effectiveness; may include healthy participants and/or patients. 
+      </LI>
+      <LI>Phase 1/Phase 2: Trials that are a combination of phases 1 and 2.
+      </LI>
+      <LI>Phase 2: Includes controlled clinical studies conducted to evaluate the effectiveness of the drug for a particular indication or indications in participants with the disease or condition under study and to determine the common short-term side effects and risks.
+      </LI>
+      <LI>Phase 2/Phase 3: Trials that are a combination of phases 2 and 3.
+      </LI>
+      <LI>Phase 3: Includes trials conducted after preliminary evidence suggesting effectiveness of the drug has been obtained, and are intended to gather additional information to evaluate the overall benefit-risk relationship of the drug.
+      </LI>
+      <LI>Phase 4: Studies of FDA-approved drugs to delineate additional information including the drug's risks, benefits, and optimal use.
+      </LI>
+      </UL>
+      <p>
+    </LI>
+
+    <LI><STRONG><A name="IntDesign" id="IntDesign">Interventional Study Model</A></STRONG>
+      <span style="color:#CC0000; font-weight:bold; font-size:x-large">*</span><span style="color:#000099; font-weight:bold;">&#167;</span>
+      <br>
+      Definition: The strategy for assigning interventions to participants.
+      <br>
+      <br>
+      <UL type=disc>
+      <LI>
+        Single Group: Clinical trials with a single arm
+      </LI>
+      <LI>
+        Parallel: Participants are assigned to one of two or more groups in parallel for the duration of the study
+      </LI>
+      <LI>
+        Crossover: Participants receive one of two (or more) alternative interventions during the initial phase of the study and receive the other intervention during the second phase of the study
+      </LI>
+      <LI>
+        Factorial: Two or more interventions, each alone and in combination, are evaluated in parallel against a control group
+      </LI>
+      <LI>
+        Sequential: Groups of participants are assigned to receive interventions based on prior milestones being reached in the study, such as in some dose escalation and adaptive design studies
+      </LI>
+      </UL>
+      <br>
+      <UL style="list-style-type:none;">
+      <LI>
+        <STRONG><A name="ModelDesc" id="ModelDesc">Model Description</A></STRONG>
+        <br>
+        Definition: Provide details about the Interventional Study Model.
+        <br>
+        Limit: 1000 characters.
+        <br>
+        <br>
+      </LI>
+      </UL>
+    </LI>
+
+    <LI><STRONG><A name="NumberOfArms" id="NumberOfArms">Number of Arms</A></STRONG>
+      <span style="color:#CC0000; font-weight:bold; font-size:x-large">*</span><span style="color:#000099; font-weight:bold;">&#167;</span>
+      <br>
+      Definition: The number of arms in the clinical trial. For a trial with multiple periods or phases that have different numbers of arms, the maximum number of arms during all periods or phases.
+      <P>
+      <u>Note</u>: "Arm" means a pre-specified group or subgroup of participant(s) in a clinical trial assigned to receive specific intervention(s) (or no intervention) according to a protocol.
+      <br>
+    </LI>
+
+    <LI><STRONG><A name="IntMasking" id="IntMasking">Masking</A></STRONG>
+      <span style="color:#CC0000; font-weight:bold; font-size:x-large">*</span><span style="color:#000099; font-weight:bold;">&#167;</span>
+      <br>
+      Definition: The party or parties involved in the clinical trial who are prevented from having knowledge of the interventions assigned to individual participants. Select all that apply.
+      <br>
+      <br>
+      <UL type=disc>
+      <LI>Roles, if Masking:
+        <UL>
+          <LI>Participant</LI>
+          <LI>Care Provider</LI>
+          <LI>Investigator</LI>
+          <LI>Outcomes Assessor: The individual who evaluates the outcome(s) of interest</LI>
+        </UL>
+      </LI>
+      <LI>No Masking</LI>
+      </UL>
+
+      <br>
+
+      <UL style="list-style-type:none;">
+      <LI>
+        <STRONG><A name="MaskingDesc" id="MaskingDesc">Masking Description</A></STRONG>
+        <br>
+        Definition: Provide information about other parties who may be masked in the clinical trial, if any.
+        <br>
+        Limit: 1000 characters.
+        <br>
+        <br>
+      </LI>
+      </UL>
+
+    </LI>
+
+    <LI><STRONG><A name="IntAllocation" id="IntAllocation">Allocation</A></STRONG>
+      <span style="color:#CC0000; font-weight:bold; font-size:x-large">*</span><span style="color:#000099; font-weight:bold;">&#167;</span>
+      <br>
+      Definition: The method by which participants are assigned to arms in a clinical trial.
+      <br>
+      <br>
+      <UL type=disc>
+      <LI>N/A (not applicable): For a single-arm trial
+      </LI>
+      <LI>Randomized: Participants are assigned to intervention groups by chance 
+      </LI>
+      <LI>Nonrandomized: Participants are expressly assigned to intervention groups through a non-random method, such as physician choice
+      </LI>
+      </UL>
+      <br>
+    </LI>
+
+    <LI><STRONG><A name="IntEnrollment" id="IntEnrollment">Enrollment</A></STRONG>
+      <span style="color:#CC0000; font-weight:bold; font-size:x-large">*</span><span style="color:#000099; font-weight:bold;">&#167;</span>
+      <br>
+      Definition: The estimated total number of participants to be enrolled (target number) or the actual total number of participants that are enrolled in the clinical study.
+      <P>
+      <u>Note</u>: "Enrolled" means a participant’s, or their legally authorized representative’s, agreement to participate in a clinical study following completion of the informed consent process. Potential participants who are screened for the purpose of determining eligibility for a study, but do not participate in the study, are not considered enrolled, unless otherwise specified by the protocol.
+      <br>
+    </LI>
+    </UL>
+    <br>
+  </LI>
+
+
+  <LI><STRONG><A name="ObsStudyDesign" id="ObsStudyDesign">Observational Study Design</A></STRONG>
+    (<em>For observational studies only</em>)
+    <br>
+    <br>
+    <UL style="list-style-type:none;">
+    <LI>
+      <STRONG><A name="ObsStudyModel" id="ObsStudyModel">Observational Study Model</A></STRONG>
+      <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+      <br>
+      Definition: Primary strategy for participant identification and follow-up. Select one. 
+      <br>
+      <br>
+      <UL type=disc>
+      <LI>Cohort: Group of individuals, initially defined and composed, with common characteristics (for example, condition, birth year), who are examined or traced over a given time period.
+      </LI>
+      <LI>Case-Control: Group of individuals with specific characteristics (for example, conditions or exposures) compared to group(s) with different characteristics, but otherwise similar.
+      </LI>
+      <LI>Case-Only: Single group of individuals with specific characteristics.
+      </LI>
+      <LI>Case-Crossover: Characteristics of case immediately prior to disease onset (sometimes called the hazard period) compared to characteristics of same case at a prior time (that is, control period).
+      </LI>
+      <LI>Ecologic or Community Studies: Geographically defined populations, such as countries or regions within a country, compared on a variety of environmental (for example, air pollution intensity, hours of sunlight) and/or global measures not reducible to individual level characteristics (for example, healthcare system, laws or policies median income, average fat intake, disease rate).
+      </LI>
+      <LI>Family-Based: Studies conducted among family members, such as genetic studies within families or twin studies and studies of family environment.
+      </LI>
+      <LI>Other: Explain in Detailed Description.
+      </LI>
+      </UL>
+      <br>
+    </LI>
+  
+    <LI><STRONG><A name="ObsTiming" id="ObsTiming">Time Perspective</A></STRONG>
+      <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+      <br>
+      Definition: Temporal relationship of observation period to time of participant enrollment. Select one.
+      <br>
+      <br>
+      <UL type=disc>
+      <LI>Retrospective: Look back using observations collected predominantly prior to subject selection and enrollment</LI>
+      <LI>Prospective: Look forward using periodic observations collected predominantly following subject enrollment</LI>
+      <LI>Cross-sectional: Observations or measurements made at a single point in time, usually at subject enrollment</LI>
+      <LI>Other: Explain in Detailed Description</LI>
+      </UL>
+      <br>
+    </LI>
+    
+    <LI><STRONG><A name="ObsBiospecimenRetention" id="ObsBiospecimenRetention">Biospecimen Retention</A></STRONG>
+      <br>
+      Definition: Indicate whether samples of material from research participants are retained in a biorepository. Select one.
+      <br>
+      <br>
+      <UL type=disc>
+      <LI>None Retained: No samples retained</LI>
+      <LI>Samples With DNA: Samples retained, with potential for extraction of DNA from at least one of the types of 
+          samples retained (e.g., frozen tissue, whole blood)</LI>
+      <LI>Samples Without DNA: Samples retained, with no potential for DNA extraction from any retained samples 
+          (e.g., fixed tissue, plasma)</LI>
+      </UL>
+      <br>
+    </LI>
+
+    <LI><STRONG><A name="ObsBiospecimenDescription" id="ObsBiospecimenDescription">Biospecimen Description</A></STRONG>
+      <br>Definition: Specify all types of biospecimens to be retained (e.g., whole blood, serum, white cells, urine, tissue).
+      <br>
+      Limit: 1000 characters.
+      <br>
+      <br>
+    </LI>
+
+    <LI><STRONG><A name="ObsEnrollment" id="ObsEnrollment">Enrollment</A></STRONG>
+      <span style="color:#CC0000; font-weight:bold; font-size:x-large">*</span>
+      <br>
+      Definition: The estimated total number of participants to be enrolled (target number) or the actual total number of participants that are enrolled in the clinical study.
+      <P>
+      <u>Note</u>: "Enrolled" means a participant’s, or their legally authorized representative’s, agreement to participate in a clinical study following completion of the informed consent process. Potential participants who are screened for the purpose of determining eligibility for a study, but do not participate in the study, are not considered enrolled, unless otherwise specified by the protocol.
+      <br>
+    </LI>
+
+    <LI>
+      <A name="RoPR" id="RoPR"><STRONG>Target Follow-Up Duration</STRONG></A>
+      <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+      <br>
+      Definition: For Patient Registries, the anticipated time period over which each participant is to be followed. Provide a number and select a Unit of Time (years, months, weeks, days). 
+      <br>
+      <br>
+    </LI>
+
+    <LI><STRONG><A name="NumberOfGroups" id="NumberOfGroups">Number of Groups/Cohorts</A></STRONG>
+      <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+      <br>
+      Definition: Number of study groups/cohorts. Enter "1" for a single-group study. Many observational studies have one group/cohort; case control studies typically have two.
+      <br>
+    </LI>
+    </UL>
+  </LI>
+  </UL>
+</div>
+
+<!-- DE 8 -->
+<a name="ArmsGroupsInterventions" id="ArmsGroupsInterventions"></a>
+<br><br>
+<div class="sectionLabel" id="ArmsGroupsInterventionsLabel">
+<img id="ArmsGroupsInterventionsImg" class="toggleImage" src="images/collapse.png" alt=""/>
+<STRONG>8. Arms, Groups, and Interventions</STRONG>
+</div>
+<div id="ArmsGroupsInterventionsBody" class="sectionBody">
+
+  <UL style="list-style-type:none;">
+    <LI>
+      <A name="Arms" id="Arms"></A>
+      <p>
+      <b>Arm Information
+      <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+      </b> (<em>For interventional studies only</em>)
+      <br>
+      Definition: A description of each arm of the clinical trial that indicates its role in the clinical trial; provides an informative title; and, if necessary, additional descriptive information (including which interventions are administered in each arm) to differentiate each arm from other arms in the clinical trial.
+      <br>
+      <br>
+      <u>Note</u>: "Arm" means a pre-specified group or subgroup of participant(s) in a clinical trial assigned to receive specific intervention(s) (or no intervention) according to a protocol.
+      <br>
+
+      <UL style="list-style-type:none;">
+        <LI>
+          <p>
+          <STRONG><a name="ArmLabel" id="ArmLabel">Arm Title</a></STRONG>
+          <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+          <br>
+          Definition: The short name used to identify the arm.
+          <br>
+          Limit: 62 characters.
+          <br>
+        </LI>
+        <LI>
+          <STRONG><a name="ArmType" id="ArmType">Arm Type</a></STRONG>
+          <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+          <br>
+          Definition: The role of each arm in the clinical trial.
+          <br>
+          <UL type=disc>
+            <LI>Experimental</LI>
+            <LI>Active Comparator</LI>
+            <LI>Placebo Comparator</LI>
+            <LI>Sham Comparator</LI>
+            <LI>No Intervention</LI>
+            <LI>Other</LI>
+          </UL>
+          <br>
+        </LI>
+
+        <LI>
+          <STRONG><a name="ArmDescription" id="ArmDescription">Arm Description</a></STRONG>
+          <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+          <br>
+          Definition: If needed, additional descriptive information (including which interventions are administered in each arm) to differentiate each arm from other arms in the clinical trial.
+          <br>
+          Limit: 999 characters.
+          <br>
+          <br>
+        </LI>
+      </UL>
+
+      <br>
+      <A name="Groups" id="Groups"></A>
+      <p>
+      <b>Group/Cohort Information</b> (<em>For observational studies only</em>)
+      <br>
+      Definition: Specify the predefined participant groups (cohorts) to be studied, corresponding to Number of Groups specified under Study Design (for single-group studies, the following data elements are optional). Do not use this section to specify strata (Detailed Description can be used for that purpose, if desired). 
+      <br>
+      Limit: 62 characters.
+      <br>
+
+      <UL style="list-style-type:none;">
+        <LI>
+          <STRONG><a name="GroupLabel" id="GroupLabel">Group/Cohort Label</a></STRONG>
+          <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+          <br>
+          Definition: The short name used to identify the group.
+          <br>
+          <br>
+      </LI>
+      <LI>
+        <STRONG><a name="GroupDescription" id="GroupDescription">Group/Cohort Description</a></STRONG>
+        <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+        <br>
+        Definition: Explanation of the nature of the study group (for example, those with a condition and those without a condition; those with an exposure and those without an exposure). 
+        <br>
+        Limit: 1000 characters.
+        <P>
+        <u>Note</u>: The overall study population should be described under Eligibility.
+        <br>
+      </LI>
+    </UL>
+
+    <A name="Interventions" id="Interventions"></A>
+    <p>
+    <STRONG>Interventions</STRONG> 
+    <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+    <br>
+    Definition: Specify the intervention(s) associated with each arm or group; at least one intervention must be specified for interventional studies. For observational studies, specify the intervention(s)/exposure(s) of interest, if any. If the same intervention is associated with more than one arm or group, provide the information once and use the Arm or Group/Intervention Cross-Reference to associate it with more than one arm or group.
+    <br>
+
+    <UL style="list-style-type:none;">
+      <LI>
+        <STRONG><A name="InterventionType" id="InterventionType">Intervention Type</A></STRONG>
+        <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+        <br>
+        Definition: For each intervention studied in the clinical study, the general type of intervention. Select one.
+        <br>
+        <UL type=disc>
+          <LI>Drug: Including placebo</LI>
+          <LI>Device: Including sham</LI>
+          <LI>Biological/Vaccine</LI>
+          <LI>Procedure/Surgery</LI>
+          <LI>Radiation</LI>
+          <LI>Behavioral: For example, psychotherapy, lifestyle counseling</LI>
+          <LI>Genetic: Including gene transfer, stem cell and recombinant DNA</LI>
+          <LI>Dietary Supplement: For example, vitamins, minerals</LI>
+          <LI>Combination Product: Combining a drug and device, a biological product and device; a drug and biological product; or a drug, biological product, and device</LI>
+          <LI>Diagnostic Test: For example, imaging, in-vitro</LI>
+          <LI>Other</LI>
+        </UL>
+        <br>
+      </LI>
+
+      <LI>
+        <STRONG><A name="InterventionName" id="InterventionName">Intervention Name(s)</A></STRONG>
+        <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+        <br>
+        Definition: A brief descriptive name used to refer to the intervention(s) studied in each arm of the clinical study. A non-proprietary name of the intervention must be used, if available. If a non-proprietary name is not available, a brief descriptive name or identifier must be used.
+        <br>
+        Limit: 200 characters.
+        <br>
+        <br>
+        <UL style="list-style-type:none;">
+          <LI>
+            <STRONG><a name="InterventionOtherName" id="InterventionOtherName">Other Intervention Name(s)</a></STRONG>
+            <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+            <br>
+            Definition: Other current and former name(s) or alias(es), if any, different from the Intervention Name(s), that the sponsor has used publicly to identify the intervention(s), including, but not limited to, past or present names such as brand name(s), or serial numbers.
+            <br>
+            Limit: 200 characters.
+            <br>
+          </LI>
+        </UL>
+        <br>
+      </LI>
+
+      <LI>
+        <STRONG><a name="InterventionDescription" id="InterventionDescription">Intervention Description</a></STRONG>
+        <span style="color:#CC0000; font-weight:bold; font-size:x-large">*</span><span style="color:#000099; font-weight:bold;">&#167;</span>
+        <br>
+        Definition: Details that can be made public about the intervention, other than the Intervention Name(s) and Other Intervention Name(s), sufficient to distinguish the intervention from other, similar interventions studied in the same or another clinical study. For example, interventions involving drugs may include dosage form, dosage, frequency, and duration.
+        <br>
+        Limit: 1000 characters.
+        <br>
+        <br>
+      </LI>
+    </UL>
+    <LI>
+      <STRONG><a name="CrossReference" id="CrossReference">Arm or Group/Interventional Cross-Reference</a></STRONG>
+      <span style="color:#CC0000; font-weight:bold; font-size:x-large">*</span>
+      <br>
+      Definition: If multiple Arms or Groups have been specified, indicate which Interventions (or exposures) are in each Arm or Group of the study, using the Cross-Reference check boxes.
+      <br>
+      <br>
+    </LI>
+  </UL>
+</div>
+
+<!-- DE 9 -->
+<a name="Outcomes" id="Outcomes"></a>
+<br><br>
+<div class="sectionLabel" id="OutcomesLabel">
+<img id="OutcomesImg" class="toggleImage" src="images/collapse.png" alt=""/>
+<STRONG>9. Outcome Measures</STRONG></div>
+<div id="OutcomesBody" class="sectionBody">
+
+  <UL style="list-style-type:none;">
+    <LI>
+      <P><STRONG><A name="PrimaryOMInfo" id="PrimaryOMInfo">Primary Outcome Measure Information</a></STRONG>
+      <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+      <br>
+      Definition: A description of each primary outcome measure (or for observational studies, specific key measurement[s] or observation[s] used to describe patterns of diseases or traits or associations with exposures, risk factors or treatment). 
+      <p>
+      <u>Note</u>: "Primary outcome measure" means the outcome measure(s) of greatest importance specified in the protocol, usually the one(s) used in the power calculation. Most clinical studies have one primary outcome measure, but a clinical study may have more than one. 
+      <p>
+      For each primary outcome measure, include the following information:
+
+      <UL style="list-style-type:none;">
+        <LI><STRONG>Title</STRONG>:
+          <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+          Name of the specific primary outcome measure
+          <br>
+          Limit: 254 characters.
+        </LI>
+
+        <LI><STRONG>Description</STRONG>:
+          <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+          Description of the metric used to characterize the specific primary outcome measure, if not included in the primary outcome measure title.
+          <br>
+          Limit: 999 characters.
+        </LI>
+
+        <LI><STRONG>Time Frame</STRONG>: 
+          <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+          Time point(s) at which the measurement is assessed for the specific metric used. The description of the time point(s) of assessment must be specific to the outcome measure and is generally the specific duration of time over which each participant is assessed (not the overall duration of the study).
+          <br>
+          Limit: 254 characters.
+        </LI>
+      </UL>
+
+      <br>
+    </LI>
+
+    <LI><STRONG><A name="SecondaryOMInfo" id="SecondaryOMInfo">Secondary Outcome Measure Information</a></STRONG>
+      <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+      <br>
+      Definition: A description of each secondary outcome measure (or for observational studies, specific secondary measurement[s] or observation[s] used to describe patterns of diseases or traits or associations with exposures, risk factors or treatment). 
+      <p>
+      <u>Note</u>: "Secondary outcome measure" means an outcome measure that is of lesser importance than a primary outcome measure, but is part of a pre-specified analysis plan for evaluating the effects of the intervention or interventions under investigation in a clinical study and is not specified as an exploratory or other measure. A clinical study may have more than one secondary outcome measure.
+      <p>
+      For each secondary outcome measure, include the following information:
+      <UL style="list-style-type:none;">
+        <LI><STRONG>Title</STRONG>:
+          <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+          Name of the specific secondary outcome measure
+        </LI>
+
+        <LI><STRONG>Description</STRONG>:
+          <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+          Description of the metric used to characterize the specific secondary outcome measure, if not included in the secondary outcome measure title.
+        </LI>
+
+        <LI><STRONG>Time Frame</STRONG>:
+          <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+          Time point(s) at which the measurement is assessed for the specific metric used. The description of the time point(s) of assessment must be specific to the outcome measure and is generally the specific duration of time over which each participant is assessed (not the overall duration of the study).
+        </LI>
+      </UL>
+
+      <br>
+      <br>
+    </LI>
+
+    <LI><STRONG><A name="OtherOMInfo" id="OtherOMInfo">Other Pre-specified Outcome Measures</a></STRONG>
+      <br>
+      Definition: Any other measurements, excluding post-hoc measures, that will be used to evaluate the intervention(s) or, for observational studies, that are a focus of the study. 
+      <UL style="list-style-type:none;">
+        <LI><STRONG>Title</STRONG>:
+          <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+          Name of the specific other pre-specified outcome measure
+        </LI>
+        <LI><STRONG>Description</STRONG>:
+          <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+          Description of the metric used to characterize the specific other pre-specified outcome measure, if not included in the other pre-specified outcome measure title.
+        </LI>
+        <LI><STRONG>Time Frame</STRONG>:
+          <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+          Time point(s) at which the measurement is assessed for the specific metric used. The description of the time point(s) of assessment must be specific to the outcome measure and is generally the specific duration of time over which each participant is assessed (not the overall duration of the study).
+        </LI>
+      </UL>
+      <br>
+    </LI>
+  </UL>
+</div>
+
+<!-- DE 10 -->
+<a name="Eligibility" id="Eligibility"></a>
+<br><br>
+<div class="sectionLabel" id="EligibilityLabel">
+<img id="EligibilityImg" class="toggleImage" src="images/collapse.png" alt=""/>
+<STRONG>10. Eligibility</STRONG>
+</div>
+<div id="EligibilityBody" class="sectionBody">
+
+  <UL style="list-style-type:none;">
+    <LI><STRONG><A name="EligibilityGender" id="EligibilityGenter">Sex/Gender</A></STRONG>
+      <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+      <br>
+      Definition: The sex and, if applicable, gender of the participants eligible to participate in the clinical study.
+      <br>
+      <br>
+
+      <UL style="list-style-type:none;">
+        <LI><STRONG><A name="EligibilitySex" id="EligibilitySex">Sex</A></STRONG>
+          <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+          <br>
+          Definition: The sex of the participants eligible to participate in the clinical study. Select one.
+          <p>
+          <u>Note</u>: "Sex" means a person's classification as male or female based on biological distinctions.
+          <UL type=disc>
+            <LI>All: Indicates no limit on eligibility based on the sex of participants
+            </LI>
+            <LI>Female: Indicates that only female participants are being studied
+            </LI>
+            <LI>Male: Indicates that only male participants are being studied
+            </LI>
+          </UL>
+          <br>
+
+          <UL style="list-style-type:none;">
+            <LI>
+              <STRONG><A name="EligibilityGender" id="EligibilityGender">Gender Based</A></STRONG>
+              <span style="color:#0000FF; font-weight:bold;  font-size:large">[*]</span>
+              <br>
+              Definition: If applicable, indicate whether participant eligibility is based on gender. Select one.
+              <p>
+              <u>Note</u>: "Gender" means a person's self-representation of gender identity. 
+              <UL type=disc>
+                <LI>Yes: Eligibility is based on gender</LI>
+                <LI>No: Eligibility is not based on gender</LI>
+              </UL>
+              <br>
+
+              <UL style="list-style-type:none;">
+                <LI>
+                  <STRONG><A name="GenderDescription" id="genderDescription">Gender Eligibility Description</A></STRONG>
+                  <br>
+                  Definition: If eligibility is based on gender, provide descriptive information about Gender criteria.
+                  <br>
+                  Limit: 1000 characters.
+                  <br>
+                  <br>
+                </LI>
+              </UL>
+            </LI>
+          </UL>
+        </LI>
+      </UL>
+    </LI>
+
+    <LI>
+      <STRONG><A name="ElibigilityAgeLimits" id="ElibigilityAgeLimits">Age Limits</a></STRONG>
+      <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+      <br>
+      Definition: The minimum and maximum age of potential participants eligible for the clinical study, provided in relevant units of time.
+      <br>
+      <UL style="list-style-type:none;">
+        <LI>
+          <br>
+          <STRONG><A name="EligibilityMinAge" id="EligibilityMinAge">Minimum Age</A></STRONG>
+          <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+          <br>
+          Definition: The numerical value, if any, for the minimum age a potential participant must meet to be eligible for the clinical study.
+          <br>
+        </LI>
+        <LI>
+          <br>
+          <STRONG><A name="EligibilityMinAgeUnitOfTime" id="EligibilityMinAgeUnitOfTime">Unit of Time</A></STRONG>
+          <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+          <br>
+          Select one.
+          <ul type=disc>
+            <li>Years</li>
+            <li>Months</li>
+            <li>Weeks</li>
+            <li>Days</li>
+            <li>Hours</li>
+            <li>Minutes</li>
+            <li>N/A (No limit)</li>
+          </ul>
+        </LI>
+  
+        <LI>
+          <P><STRONG><A name="EligibilityMaxAge" id="EligibilityMaxAge">Maximum Age</A></STRONG>
+          <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+          <br>
+          Definition: The numerical value, if any, for the maximum age a potential participant can be to be eligible for the clinical study.
+        </LI>
+  
+        <LI>
+          <STRONG><A name="EligibilityMaxAgeUnitOfTime" id="EligibilityMaxAgeUnitOfTime">Unit of Time</A></STRONG>
+          <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+          <br>
+          Select one.
+          <UL type=disc>
+            <LI>Years</LI>
+            <LI>Months</LI>
+            <LI>Weeks</LI>
+            <LI>Days</LI>
+            <LI>Hours</LI>
+            <LI>Minutes</LI>
+            <LI>N/A (No limit)</LI>
+          </UL>
+          <br>
+        </LI>
+      </UL>
+    </LI>
+
+    <LI><STRONG><A name="HealthyVolunteers" id="HealthyVolunteers">Accepts Healthy Volunteers</A></STRONG>
+      <span style="color:#CC0000; font-weight:bold; font-size:x-large">*</span><span style="color:#000099; font-weight:bold;">&#167;</span>
+      (<em>Optional for Observational Studies</em>)
+      <br>
+      Definition: Indication that participants who do not have a disease or condition, or related conditions or symptoms, under study in the clinical study are permitted to participate in the clinical study. Select Yes/No.
+     <br>
+      <br>
+    </LI>
+
+    <LI>
+      <STRONG><A name="EligibilityCriteria" id="EligibilityCriteria">Eligibility Criteria</A></STRONG>
+      <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+      <br>
+      Definition: A limited list of criteria for selection of participants in the clinical study, provided in terms of inclusion and exclusion criteria and suitable for assisting potential participants in identifying clinical studies of interest. Use a bulleted list for each criterion below the headers "Inclusion Criteria" and "Exclusion Criteria".
+      <br>
+      Limit: 15,000 characters.
+      <br>
+      <br>
+    </LI>
+
+    <LI>
+      <STRONG><A name="EligibilityStudyPopulation" id="EligibilityStudyPopulation">Study Population Description</A></STRONG>
+      <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+      (<em>For observational studies only</em>)
+      <br>
+      Definition: A description of the population from which the groups or cohorts will be selected (for example, primary care clinic, community sample, residents of a certain town).
+      <br>
+      Limit: 1000 characters.
+      <br>
+      <br>
+    </LI>
+
+    <LI>
+      <STRONG><A name="EligibilitySamplingMethod" id="EligibilitySamplingMethod">Sampling Method</A></STRONG>
+      <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+      (<em>For observational studies only</em>)
+      <br>
+      Definition: Indicate the method used for the sampling approach and explain in the Detailed Description. Select one.
+      <br>
+      <br>
+      <UL type=disc>
+        <LI>
+          Probability Sample: Exclusively random process to guarantee that each participant or population has specified chance of selection, such as simple random sampling, systematic sampling, stratified random sampling, cluster sampling, and consecutive participant sampling 
+        </LI>
+        <LI>
+          Non-Probability Sample: Any of a variety of other sampling processes, such as convenience sampling or invitation to volunteer 
+        </LI>
+      </UL>
+      <br>
+      <br>
+    </LI>
+  </UL>
+</div>
+
+<!-- DE 11 -->
+<a name="Locations" id="Locations"></a>
+<br><br>
+<div class="sectionLabel" id="LocationsLabel">
+<img id="LocationsImg" class="toggleImage" src="images/collapse.png" alt=""/>
+<STRONG>11. Contacts, Locations, and Investigator Information</STRONG>
+</div>
+<div id="LocationsBody" class="sectionBody">
+
+  <UL style="list-style-type:none;">
+    <LI>
+      <STRONG><A name="OverallStudyContact" id="OverallStudyContact">Central Contact Person</A></STRONG>
+      <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+      (<em>or Facility Contact required</em>)
+      <br>
+      Definition: The name or title, toll-free telephone number and email address of a person to whom questions concerning enrollment at any location of the study can be addressed. Include the following information:
+      <br>
+      <br>
+      <UL style="list-style-type:none;">
+        <LI><A name="OvrContactFirstName" id="OvrContactFirstName"></A><STRONG>First Name</STRONG> </LI>
+        <LI><A name="OvrContactMiddleName" id="OvrContactMiddleName"></A><STRONG>Middle Initial</STRONG> </LI>
+        <LI><A name="OvrContactLastName" id="OvrContactLastName"></A><STRONG>Last Name or Official Title</STRONG>
+          <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+        <LI><A name="OvrContactDegrees" id="OvrContactDegrees"></A><STRONG>Degree</STRONG> </LI>
+        <LI><A name="OvrContactPhone" id="OvrContactPhone"></A><STRONG>Phone</STRONG>:
+          <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+          Toll free phone number of the Central Contact Person. Use the format 800-555-5555 within the United States and Canada. If outside the United States and Canada, provide the full phone number, including the country code.</LI>
+        <LI><STRONG>Ext</STRONG>: phone extension, if needed </LI>
+        <LI><A name="OvrContactEmail" id="OvrContactEmail"></A><STRONG>Email</STRONG>:
+          <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+          electronic mail address of the central contact person
+        </LI>
+      </UL>
+      <br>
+    </LI>
+
+    <LI>
+      <STRONG><A name="OverallStudyContactBackup" id="OverallStudyContactBackup">Central Contact Backup</A></STRONG>
+      <br>
+      Definition: Person to contact if Central Contact is not available. Include the following information:
+      <br>
+      <br>
+      <UL style="list-style-type:none;">
+        <li><STRONG>First Name</STRONG></li>
+        <li><STRONG>Middle Initial</STRONG></li>
+        <li><STRONG>Last Name or Official Title</STRONG></li>
+        <li><STRONG>Degree</STRONG></li>
+        <li><STRONG>Phone</STRONG>: Toll free phone number of the Central Contact Backup. Use the format 800-555-5555 within the United States and Canada. If outside the United States and Canada, provide the full phone number, including the country code. </li>
+        <li><STRONG>Ext</STRONG>: Phone extension, if needed </li>
+        <li><STRONG>Email</STRONG>: Electronic mail address of the contact person</li>
+      </ul>
+      <br>
+    </LI>
+
+    <LI>
+      <STRONG><A name="StudyOfficials" id="StudyOfficials">Overall Study Officials</A></STRONG>
+      <br>
+      Definition: Person(s) responsible for the overall scientific leadership of the protocol, including study principal investigator. Include the following information:
+      <br>
+      <br>
+      <UL style="list-style-type:none;">
+        <LI><STRONG>First Name</STRONG></LI>
+        <LI><STRONG>Middle Initial</STRONG></LI>
+        <LI><STRONG>Last Name</STRONG></LI>
+        <LI><STRONG>Degree </STRONG></LI>
+        <LI><A name="OfficialsAffiliation" id="OfficialAffiliation"><STRONG>Organizational Affiliation</STRONG></A>: Full name of the official's organization.
+          If none, specify Unaffiliated.
+          <br>
+          Limit: 255 characters.
+          <br>
+        </LI>
+        <LI><A name="OfficialsTitle" id="OfficialsTitle"><STRONG>Official's Role</STRONG>:</A> Position or function of the 
+          official. Select one 
+          <UL style="list-style-type:disc;">
+            <li>Study Chair</li>
+            <li>Study Director</li>
+            <li>Study Principal Investigator</li>
+          </ul>
+        </LI>
+      </UL>
+
+      <br>
+    </LI>
+
+    <LI><STRONG><A name="Facility" id="Facility">Facility Information</A></STRONG>
+      <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+      <br>
+      Definition: For each participating facility in a clinical study, the following information:
+      <br>
+      <UL style="list-style-type:none;">
+        <LI><A name="FacilityName" id="FacilityName"><STRONG>Facility Name:</STRONG></A>
+         <span style="color:#CC0000; font-weight:bold; font-size:x-large">*</span><span style="color:#000099; font-weight:bold;">&#167;</span>
+          Full name of the organization where the clinical study is being conducted.
+          <br>
+          Limit: 254 characters.
+        </LI>
+        <LI><A name="FacilityCity" id="FacilityCity"><STRONG>City</STRONG></A> 
+          <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+        </LI>
+        <LI><A name="FacilityState" id="FacilityState"><STRONG>State/Province</STRONG></A>: 
+          <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+          Required for U.S. locations (including territories of the United States)
+        </LI>
+        <LI><A name="FacilityZip" id="FacilityZip"><STRONG>ZIP/Postal Code</STRONG></A>: 
+          <span style="color:#CC0000; font-weight:bold; font-size:x-large">*</span><span style="color:#000099; font-weight:bold;">&#167;</span>
+          Required for U.S. locations (including territories of the United States)
+        </LI>
+        <LI><A name="FacilityCountry" id="FacilityCountry"><STRONG>Country</STRONG></A>
+          <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+        </LI>
+      </UL>
+
+      <P><STRONG><A name="FacilityStatus" id="FacilityStatus">Individual Site Status</A></STRONG>
+      <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+      <br>
+      Definition: The recruitment status of each participating facility in a clinical study.
+      <br>
+      <UL type=disc>
+        <LI>Not yet recruiting: Participants are not yet being recruited
+        </LI>
+        <LI>Recruiting: Participants are currently being recruited, whether or not any participants have yet been enrolled
+        </LI>
+        <LI>Enrolling by invitation: Participants are being, or will be selected from a predetermined population
+        </LI>
+        <LI>Active, not recruiting: Study is continuing, meaning participants are receiving an intervention or being examined, but new participants are not currently being recruited or enrolled
+        </LI>
+        <LI>Completed: The study has concluded normally; participants are no longer receiving an intervention or being examined (that is, the last participant's last visit has occurred)
+        </LI>
+        <LI>Suspended: Study halted prematurely but potentially will resume
+        </LI>
+        <LI>Terminated: Study halted prematurely and will not resume; participants are no longer being examined or receiving intervention
+        </LI>
+        <LI>Withdrawn: Study halted prematurely, prior to enrollment of first participant
+        </LI>
+      </UL>
+      <br>
+    </LI>
+
+    <LI>
+      <P><STRONG><A name="FacilityContact" id="FacilityContact">Facility Contact</A></STRONG>
+      <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+      (<em>or Central Contact required</em>)
+      <br>
+      Definition: For each facility participating in a clinical study, including the name or title, telephone number, and email address of a person to whom questions concerning the study and enrollment at that site can be addressed. Include the following information:
+      <br>
+
+      <UL style="list-style-type:none;">
+        <LI><STRONG>First Name</STRONG></LI> 
+        <LI><STRONG>Middle Initial</STRONG></LI> 
+        <LI><STRONG>Last Name or Official Title</STRONG>
+          <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+        </LI>
+        <LI><STRONG>Degree</STRONG></LI>
+        <LI><A name="FacilityContactPhone" id="FacilityContactPhone"></A><STRONG>Phone</STRONG>:
+          <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+          Office phone of the Facility Contact.
+        </LI>
+        <LI><STRONG>Ext</STRONG>: phone extension, if needed 
+        </LI>
+        <LI><A name="FacilityContactEmail" id="FacilityContactEmail"><STRONG>Email</STRONG>:
+          <span style="color:#CC0000; font-weight:bold;  font-size:x-large">*</span>
+          Electronic mail address of the facility contact person</A>
+        </LI>
+      </UL>
+
+      <br>
+      </LI>
+
+      <LI><STRONG><A name="FacilityContactBackup" id="FacilityContactBackup">Facility Contact Backup</A></STRONG> 
+        <br>
+        Definition: Person to contact if Facility Contact is not available (that is, a second contact person).
+        <br>
+        <br>
+      </LI>
+
+      <LI><STRONG><A name="Investigator" id="Investigator">Investigators</A></STRONG> 
+        (at the facility location). Include the following information:
+        <br>
+        <br>
+        <UL style="list-style-type:none;">
+          <LI><A name="InvestigatorFirstName" id="InvestigatorFirstName"><STRONG>First Name</STRONG></A> 
+          <LI><A name="InvestigatorMiddleName" id="InvestigatorMiddleName"><STRONG>Middle Initial</STRONG></A> 
+          <LI><A name="InvestigatorLastName" id="InvestigatorLastName"><STRONG>Last Name</STRONG></A> 
+          <LI><A name="InvestigatorDegrees" id="InvestigatorDegrees"><STRONG>Degree</STRONG></A> 
+          <LI><A name="InvestigatorRole" id="InvestigatorRole"><STRONG>Role</STRONG></A>: 
+          <ul type=disc>
+            <li>
+              Site Principal Investigator
+            </li>
+            <li>
+              Site Sub-Investigator
+            </li>
+          </ul>
+        </LI>
+      </UL>
+      <br>
+    </LI>
+    <LI>
+      Contact information character limits: 
+      <br>
+      <br>
+      <UL style="list-style-type:none;">
+        <LI>First Name: 62 characters</LI>    
+        <LI>Last Name: 62 characters</LI>    
+        <LI>Degree: 30 characters</LI>    
+        <LI>Phone: 30 characters</LI>    
+        <LI>Phone Ext: 14 characters</LI>    
+        <LI>Email: 254 characters</LI>    
+      </UL>
+    </LI>
+  </UL>
+</div>
+
+<!-- DE 12 -->
+<a name="IPDSharing" id="IPDSharing"></a>
+<br><br>
+<div class="sectionLabel" id="IPDSharingLabel">
+<img id="IPDSharingImg" class="toggleImage" src="images/collapse.png" alt=""/>
+<STRONG>12. IPD Sharing Statement</STRONG>
+</div>
+<div id="IPDSharingBody" class="sectionBody">
+  <UL style="list-style-type:none;">
+    <LI>
+      <STRONG><A name="PlantoShareIPD" id="PlantoShareIPD">Plan to Share IPD</A></STRONG>
+      <br>
+      Definition: Indicate whether there is a plan to make individual participant data (IPD) collected in this study, 
+      including data dictionaries, available to other researchers (typically after the end of the study). Select one.
+            <UL type=disc>
+              <LI>Yes: There is a plan to make IPD and related data dictionaries available.</LI>
+              <LI>No: There is not a plan to make IPD available.</LI>
+              <LI>Undecided: It is not yet known if there will be a plan to make IPD available.</LI>
+            </UL>
+            <br>
+            <UL style="list-style-type:none;">
+              <LI>
+                <strong>IPD Sharing Plan Description</strong>
+                <br>
+                Definition: If Plan to Share IPD is "Yes," briefly describe what specific  
+		individual participant data sets are to be shared (for example, all collected IPD, 
+		all IPD that underlie results in a publication). If the Plan to Share IPD 
+		is "No" or "Undecided," an explanation may be provided for why IPD will not be shared or why it is not yet decided.
+                <br>
+                Limit: 1000 characters.
+              </LI>
+              <br>
+              <LI>
+		<div>If Plan to Share IPD is "Yes," provide the following information.</div>
+		<br>
+              </LI>
+              <LI>
+                <strong>IPD Sharing Supporting Information Type</strong>
+                <br>
+                Definition: The type(s) of supporting information that will be shared, in addition to the individual 
+		participant data set and data dictionaries for the IPD itself. Select all that apply.
+                <ul>
+		  <li>Study Protocol</li>
+		  <li>Statistical Analysis Plan (SAP)</li>
+		  <li>Informed Consent Form (ICF)</li>
+		  <li>Clinical Study Report (CSR)</li>
+		  <li>Analytic Code</li>
+		</ul>
+              </LI>
+              <br>
+              <LI>
+                <strong>IPD Sharing Time Frame</strong>
+                <br>
+                Definition: A description of when the IPD and any additional supporting information will become available and 
+		for how long, including the start and end dates or period of availability. This may be provided as an absolute 
+		date (for example, starting in January 2025) or as a date relative to the time when summary data are published or 
+		otherwise made available (for example, starting 6 months after publication).
+                <br>
+                Limit: 1000 characters.
+              </LI>
+              <br>
+              <LI>
+                <strong>IPD Sharing Access Criteria</strong>
+                <br>
+                Definition: Describe by what access criteria IPD and any additional supporting information will be shared, 
+		including with whom, for what types of analyses, and by what mechanism. Information about who will review 
+		requests and criteria for reviewing requests may also be provided.
+                <br>
+                Limit: 1000 characters.
+              </LI>
+              <br>
+              <LI>
+                <strong>IPD Sharing URL</strong>
+                <br>
+                Definition: The web address, if any, used to find additional information about the plan to share IPD.
+                <br>
+                Limit: 3999 characters.
+              </LI>
+           </UL>
+            <br>
+          </LI>
+
+  </UL>
+</div>
+
+
+
+<!-- DE 13 -->
+<br><br>
+<div class="sectionLabel" id="ReferencesLabel">
+<img id="ReferencesImg" class="toggleImage" src="images/collapse.png" alt=""/>
+<A name="References" id="References">
+<STRONG>13. References</STRONG>
+</div>
+<div id="ReferencesBody" class="sectionBody">
+  <UL style="list-style-type:none;">
+    <LI>
+      <STRONG>Citations</A></STRONG>
+      <br>
+      Definition: Citations to publications related to the protocol: background and/or results. Provide either the PubMed Unique Identifier (PMID) of an article or enter the full bibliographic citation.
+      <br>
+      <br>
+      <UL style="list-style-type:none;">
+        <LI><STRONG><A name="PubMedId" id="PubMedId">PubMed Identifier</A></STRONG>
+          <br>
+          Definition: PMID for the citation in MEDLINE
+          <br>
+          <br>
+        </LI>
+        <LI><STRONG><A name="Citation" id="Citation">Citation</A></STRONG>
+          <br>
+          Definition: A bibliographic reference in NLM's MEDLINE format
+          <br>
+          Limit: 2000 characters.
+          <br>
+          <br>
+        </LI>
+        <LI>
+          <STRONG><A name="IsResultsRef" id="IsResultsRef">Results Reference</A></STRONG>
+          <br>
+          Definition: Indicate if the reference provided reports on results from this clinical study. Select Yes/No.
+        </LI>
+      </UL>
+
+      <br>
+      <STRONG><A name="Links" id="Links">Links</A></STRONG>
+      <br>
+      Definition: A web site directly relevant to the protocol may be entered, if desired. Do not include sites whose primary goal is to advertise or sell commercial products or services. Links to educational, research, government, and other non-profit web pages are acceptable. All submitted links are subject to review by ClinicalTrials.gov. 
+      <br>
+      <br>
+
+      <UL style="list-style-type:none;">
+        <LI>
+          <STRONG><A name="URL" id="URL">URL</A></STRONG>
+          <br>
+          Definition: Complete URL, including http:// or https://
+          <br>
+          Limit: 3999 characters.
+          <br>
+          <P><STRONG><A name="LinkDescription" id="LinkDescription">Description</A></STRONG>
+          <br>Definition: Title or brief description of the linked page. 
+          <br>
+          Limit: 254 characters.
+        </LI>
+      </UL>
+      <br>
+
+      <strong><A name="AvailableStudyData" id="AvailableStudyData">Available IPD and Supporting Information</A></strong>
+      <br>Definition: The individual participant data (IPD) sets and supporting information that are being 
+      shared for the study.
+      Provide the following information for each:
+      <br>
+      <br>
+      <UL style="list-style-type:none;">
+        <li>
+          <strong>Available IPD/Information Type</strong>
+          <br>Definition: The type of data set or supporting information being shared.<br>
+          <ul type=disc>
+            <li>Individual Participant Data Set</li>
+            <li>Study Protocol</li>
+            <li>Statistical Analysis Plan</li>
+            <li>Informed Consent Form</li>
+            <li>Clinical Study Report</li>
+            <li>Analytic Code</li>
+            <li>Other (specify)</li>
+          </ul>
+          <br>
+          <strong>Available IPD/Information URL</strong>
+          <br>
+          Definition: The web address used to request or access the data set or supporting information.
+          <br>
+          Limit: 3999 characters.
+          <br><br>
+          <strong>Available IPD/Information Identifier</strong>
+          <br>
+          Definition: The unique identifier used by a data repository for the data set or supporting information.
+          <br>
+          Limit: 30 characters.
+          <br><br>
+          <strong>Available IPD/Information Comments</strong>
+          <br>
+          Definition: Additional information including the name of the data repository or other location where 
+	  the data set or supporting information is available. Provide any additional explanations about the 
+	  data set or supporting information and instructions for obtaining access, particularly if a URL is not provided.
+          <br>
+          Limit: 1000 characters.
+        </li>
+      </ul>
+
+      <br><br>
+
+    </LI>
+  </UL>
+</div>
+<br><br>
+
+
+<!-- Appendixes -->
+<hr>
+<br><br>
+<div class="sectionLabel" id="DocumentUploadLabel">
+  <img id="DocumentUploadImg" class="toggleImage" src="images/collapse.png" alt=""/>
+  <A name="DocumentUpload" id="DocumentUpload">
+  <STRONG>A.1 Document Upload Information</A></STRONG>
+</div>
+<div class="sectionBody" id="DocumentUploadBody">
+  <UL style="list-style-type:none;">
+    <li>
+      For details on uploading study documents (study protocol, statistical analysis plan, and/or informed consent form), 
+      see the 
+      <a href="results_definitions.html#DocumentUpload">
+	  Document Upload Information</a>
+      in the Results Data Element Definitions.
+      <br><br>
+    </li>
+  </UL>
+</div>
+
+
+<br>
+<div class="sectionLabel" id="RespPartyContactLabel">
+  <img id="RespPartyContactImg" class="toggleImage" src="images/collapse.png" alt=""/>
+  <STRONG><A name="RespPartyContact" id="RespPartyContact">A.2 Responsible Party Contact Information</A></STRONG>
+  <span style="color:#CC0000; font-weight:bold; font-size:x-large">*</span><span style="color:#000099; font-weight:bold;">&#167;</span>
+</div>
+<div class="sectionBody" id="RespPartyContactBody">
+  <UL style="list-style-type:none;">
+    <LI>
+      (<em>Provided as part of User Information or Organization Information in a PRS Account</em>)
+      <br><br>
+      Definition: Administrative information to identify and enable communication with the responsible party by telephone, email, and regular mail or delivery service. Responsible Party Contact Information is for the individual who is the responsible party or of a designated employee of the organization that is the responsible party. (<em>Will not be made public - for administrative purposes only</em>.)
+      <p>
+      <u>Note</u>: "Responsible party" means with respect to a clinical study, the sponsor of the clinical study, as 
+      defined in 21 CFR 50.3; or the principal investigator of such clinical study if so designated by a sponsor, grantee, contractor, or awardee, so long as the principal investigator is responsible for conducting the study, has access to and control over the data from the clinical study, has the right to publish the results of the study, and has the ability to meet all of the requirements for the submission of clinical study information. For a pediatric postmarket surveillance of a device product that is not a clinical trial, the responsible party is the entity who FDA orders to conduct the pediatric postmarket surveillance of the device product.
+      <UL style="list-style-type:none;">
+        <li>Name of Individual
+          <span style="color:#CC0000; font-weight:bold; font-size:x-large">*</span>
+        </li>
+        <li>Official Title
+          <span style="color:#CC0000; font-weight:bold; font-size:x-large">*</span>
+        </li>
+        <li>Physical Address
+          <span style="color:#CC0000; font-weight:bold; font-size:x-large">*</span>
+          <UL style="list-style-type:none;">
+            <li>Name of Organizational Affiliation
+              <span style="color:#CC0000; font-weight:bold; font-size:x-large">*</span>
+            </li>
+            <li>Street Address
+              <span style="color:#CC0000; font-weight:bold; font-size:x-large">*</span>
+            </li>
+            <li>City
+              <span style="color:#CC0000; font-weight:bold; font-size:x-large">*</span>
+            </li>
+            <li>State/Province
+              <span style="color:#CC0000; font-weight:bold; font-size:x-large">*</span>
+            </li>
+            <li>ZIP/Postal Code
+              <span style="color:#CC0000; font-weight:bold; font-size:x-large">*</span>
+            </li>
+            <li>Country
+              <span style="color:#CC0000; font-weight:bold; font-size:x-large">*</span>
+            </li>
+          </ul>
+        </li>
+        <li>Mailing Address 
+          <span style="color:#CC0000; font-weight:bold; font-size:x-large">*</span>
+          (<em>If different from Physical Address</em>)
+          <UL style="list-style-type:none;">
+            <li>Name of Organizational Affiliation
+              <span style="color:#CC0000; font-weight:bold; font-size:x-large">*</span>
+            </li>
+            <li>Street Address
+              <span style="color:#CC0000; font-weight:bold; font-size:x-large">*</span>
+            </li>
+            <li>City
+              <span style="color:#CC0000; font-weight:bold; font-size:x-large">*</span>
+            </li>
+            <li>State/Province
+              <span style="color:#CC0000; font-weight:bold; font-size:x-large">*</span>
+            </li>
+            <li>ZIP/Postal Code
+              <span style="color:#CC0000; font-weight:bold; font-size:x-large">*</span>
+            </li>
+            <li>Country
+              <span style="color:#CC0000; font-weight:bold; font-size:x-large">*</span>
+            </li>
+            <li>Phone: <span style="color:#CC0000; font-weight:bold; font-size:x-large">*</span>
+              Use the format 800-555-5555 within the United States and Canada. Otherwise, provide the full number, including the country code. 
+            </li>
+            <li>Ext: phone extension, if needed 
+            </li>
+            <li>Email:
+              <span style="color:#CC0000; font-weight:bold; font-size:x-large">*</span>
+              Electronic mail address 
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </UL>
+
+</div>
+
+<!-- DE Last -->
+<a name="HistoryOfChanges" id="HistoryOfChanges"></a>
+<br><br>
+<div class="sectionLabel" id="HistoryOfChangesLabel">
+<img id="HistoryOfChangesImg" class="toggleImage" src="images/collapse.png" alt=""/>
+<STRONG>History of Changes</STRONG>
+</div>
+<div id="HistoryOfChangesBody" class="sectionBody">
+  <UL style="list-style-type:none;">
+    <LI>
+      January 18, 2017:&nbsp;&nbsp;Document updated with data element changes per the FDAAA 801 final rule (42 CFR Part 11).
+    </LI>
+    <LI>
+      February 07, 2017:&nbsp;&nbsp;Formatting and typographical errors were corrected.
+    </LI>
+    <LI>
+      April 18, 2017:&nbsp;&nbsp;Added clarification that "(clinical trial)" has the same meaning as "Interventional" in Study Type and added definitions for "Yes" and "No" in U.S. Food and Drug Administration IND or IDE. Product Manufactured in and Exported from the U.S. and Outcome Measure Description definitions modified to describe when the information is required. Modified Cross-Reference element to address observational studies. Minor formatting changes.
+    </LI>
+    <LI>
+      June 29, 2017:&nbsp;&nbsp;Updated data elements related to Plan to Share IPD and moved to  IPD Sharing Statement module. Added Document Upload Information reference (to Results Data Elements Definitions) as Appendix 1 (A.1.). Labeled Responsible Party Contact Information as Appendix 2 (A.2.). Brief Title, Study Phase - Early Phase 1, Collaborators, and Primary Purpose - Device Feasibility definitions updated with additional information to clarify meaning.
+    </LI>
+    <LI>
+      June 27, 2018:&nbsp;&nbsp; Typographical errors were corrected.
+    </LI>
+  </UL>
+<br>
+</div>
+
+<div class="noprint" align="center" 
+    style="position:fixed; bottom:0; width:110%; background:#eeeeee; border:solid 1px #aaaaaa; padding:0; margin:0 -0px 0 -40px;" >
+    <input type="button" style="background:#DDDDDD; font-size:small; border-width:2px; margin:3px;" 
+    value="Close" onClick="self.close();">
+</div>
+<div style="padding:1em;"></div>
+</BODY>
+</HTML>
